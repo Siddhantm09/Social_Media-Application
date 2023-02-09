@@ -1,64 +1,78 @@
-const User = require("../models/User");
+const User = require("../models/User");  //schema
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
+const jwt = require("jsonwebtoken")
+
 const { success, error } = require('../utils/responseWrapper')
+
+
 
 const signupController = async (req, res) => {
     try {
+
         const { email, password } = req.body
 
         if (!email || !password) {
-            //res.status(400).send("All fields are is required");\
             res.send(error(401, 'All fields are is required'))
         }
-        const oldUser = await User.findOne({ email });
+
+
+        const oldUser = await User.findOne({ email });//find if email already exists in MongoDB collection
+
+
         if (oldUser) {
-            //return res.status(409).send("User already exists");
             res.send(error(409, 'User already exists'))
         }
 
         const hashPassword = await bcrypt.hash(password, 10);
 
-        const user = await User.create({
+        const user = await User.create({   //create a document in MongoDB collection
             email,
             password: hashPassword,
         });
+
         return res.send(success(201, { user }));
+
+
     } catch (error) {
         console.log(error);
     }
 }
 
+
+
 const loginController = async (req, res) => {
     try {
+
         const { email, password } = req.body;
 
+
         if (!email || !password) {
-            //res.status(400).send("All fields are is required");
             res.send(error(400, 'All fields are is required'))
         }
 
-        const users = await User.findOne({ email });
+
+        const users = await User.findOne({ email });//find if email already exists in MongoDB collection
+
         if (!users) {
-            //return res.status(400).send("Invalid Email");
             res.send(error(400, 'Invalid Email'))
         }
 
+
         const matched = await bcrypt.compare(password, users.password);
+
+
         if (!matched) {
-            // return res.status(403).send("Password incorrect");
             res.send(error(403, 'Password incorrect'))
         }
 
         const accessToken = generateAccessToken({ _id: users._id });
         const refreshToken = refreshAccessToken({ _id: users._id });
 
+
         res.cookie('jwt', refreshToken, {
             httpOnly: true,
-            secure: true
-
-        })
+            secure: true,
+        });
 
         return res.send(success(200, { accessToken }));
 
@@ -66,30 +80,44 @@ const loginController = async (req, res) => {
         console.log(error);
     }
 };
+
+
+
 //check if refresh token is valid and then send new access token
 const refreshAccessTokenController = async (req, res) => {
-    if (!req.cookies) {
-        //return res.status(401).send('Cookie-Refresh Token required')
-        res.send(error(401, 'Cookie-Refresh Token required'))
+    console.log(req)
+    const cookies = req.cookies;
+
+
+    if (!cookies.jwt) {
+
+        return res.send(error(401, 'Cookie-Refresh Token required'))
     }
+
+    const refreshToken = cookies.jwt;
+
+
 
     try {
         const decoded = jwt.verify(
             refreshToken,
             process.env.REFRESH_ACCESS_TOKEN_KEY
         );
+
         const _id = decoded._id
 
         const accessToken = generateAccessToken({ _id })
 
-        return res.status(201).json(accessToken)
+        return res.send(success(201, { accessToken }));
 
 
     } catch (error) {
         return res.status(401).send("Login Again - Refresh token expired");
-        //res.send(error(409, 'Login Again - Refresh token expired'))
+
     }
 };
+
+
 
 //internal functions (generate tokens)
 const generateAccessToken = (data) => {
@@ -97,6 +125,7 @@ const generateAccessToken = (data) => {
         const token = jwt.sign(data, process.env.SECRET_ACCESS_TOKEN_KEY, {
             expiresIn: "15m",
         });
+
         return token;
     } catch (error) {
         console.log(error);
