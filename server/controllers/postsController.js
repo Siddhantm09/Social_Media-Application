@@ -1,6 +1,7 @@
 const getAllPostsController = (req, res) => {
     console.log(req._id)
-    res.send('These are Posts')
+
+    return res.send(success(201, 'These are Posts'));
 
 }
 module.exports = { getAllPostsController }

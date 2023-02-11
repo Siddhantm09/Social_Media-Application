@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const { success, error } = require('../utils/responseWrapper')
 
+
 module.exports = async (req, res, next) => {
     //Check if Authorization header (startsWith("Bearer")) is present
     if (!req.headers?.authorization?.startsWith("Bearer")) {

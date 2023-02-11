@@ -1,7 +1,6 @@
 const User = require("../models/User");  //schema
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken")
-
 const { success, error } = require('../utils/responseWrapper')
 
 
@@ -85,7 +84,7 @@ const loginController = async (req, res) => {
 
 //check if refresh token is valid and then send new access token
 const refreshAccessTokenController = async (req, res) => {
-    console.log(req)
+
     const cookies = req.cookies;
 
 
@@ -112,8 +111,8 @@ const refreshAccessTokenController = async (req, res) => {
 
 
     } catch (error) {
-        return res.status(401).send("Login Again - Refresh token expired");
 
+        return res.send(error(401, '"Login Again - Refresh token expired"'))
     }
 };
 
