@@ -9,11 +9,14 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await axiosClient.post("/auth/login", {
-      email,
-      password,
-    });
-    console.log(result);
+    try {
+      const result = await axiosClient.post("/auth/login", {
+        email,
+        password,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="login">

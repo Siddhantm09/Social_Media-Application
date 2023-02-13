@@ -1,3 +1,5 @@
+const { success, error } = require("../utils/responseWrapper");
+
 const getAllPostsController = (req, res) => {
     console.log(req._id)
 

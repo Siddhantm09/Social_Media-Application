@@ -11,7 +11,7 @@ const signupController = async (req, res) => {
         const { email, password } = req.body
 
         if (!email || !password) {
-            res.send(error(401, 'All fields are is required'))
+            res.send(error(400, 'All fields are is required'))
         }
 
 
@@ -32,8 +32,8 @@ const signupController = async (req, res) => {
         return res.send(success(201, { user }));
 
 
-    } catch (error) {
-        console.log(error);
+    } catch (err) {
+        console.log(err);
     }
 }
 
@@ -75,8 +75,8 @@ const loginController = async (req, res) => {
 
         return res.send(success(200, { accessToken }));
 
-    } catch (error) {
-        console.log(error);
+    } catch (err) {
+        console.log(err);
     }
 };
 
@@ -90,7 +90,7 @@ const refreshAccessTokenController = async (req, res) => {
 
     if (!cookies.jwt) {
 
-        return res.send(error(401, 'Cookie-Refresh Token required'))
+        return res.send(error(401, "Refresh token in cookie is required"))
     }
 
     const refreshToken = cookies.jwt;
@@ -126,8 +126,8 @@ const generateAccessToken = (data) => {
         });
 
         return token;
-    } catch (error) {
-        console.log(error);
+    } catch (err) {
+        console.log(err);
     }
 };
 const refreshAccessToken = (data) => {

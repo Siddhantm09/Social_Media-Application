@@ -24,8 +24,8 @@ module.exports = async (req, res, next) => {
 
         next();
 
-    } catch (error) {
-        console.log(error);
+    } catch (e) {
+        console.log(e);
 
         return res.send(error(401, 'Access Token Invalid / expired'));
 
