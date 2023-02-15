@@ -110,7 +110,7 @@ const refreshAccessTokenController = async (req, res) => {
         return res.send(success(201, { accessToken }));
 
 
-    } catch (error) {
+    } catch (err) {
 
         return res.send(error(401, '"Login Again - Refresh token expired"'))
     }
@@ -122,7 +122,7 @@ const refreshAccessTokenController = async (req, res) => {
 const generateAccessToken = (data) => {
     try {
         const token = jwt.sign(data, process.env.SECRET_ACCESS_TOKEN_KEY, {
-            expiresIn: "15m",
+            expiresIn: "20s",
         });
 
         return token;

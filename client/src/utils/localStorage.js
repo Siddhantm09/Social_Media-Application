@@ -7,7 +7,7 @@ export const getItem = (key) => {
 
 //save access token after login
 export const setItem = (key, value) => {
-    return localStorage.getItem(key, value)
+    return localStorage.setItem(key, value)
 }
 
 //logout

@@ -21,7 +21,7 @@ app.use(morgan('common'))   //Shows info of API you hit
 app.use(cookieParser());   //Parse cookie data so that we can use it in req obj
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:3 000'
+    origin: 'http://localhost:3000'
 }))
 app.use("/auth", authRouter);
 app.use("/posts", postsRouter)

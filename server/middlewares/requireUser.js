@@ -4,12 +4,14 @@ const { success, error } = require('../utils/responseWrapper')
 
 module.exports = async (req, res, next) => {
     //Check if Authorization header (startsWith("Bearer")) is present
+
     if (!req.headers?.authorization?.startsWith("Bearer")) {
 
         return res.send(error(401, "Authorization header is required"));
     }
 
     const accessToken = req.headers.authorization.split(" ")[1];
+
 
     //verify the access Token valid/expired or not
     try {
