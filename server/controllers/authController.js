@@ -8,7 +8,7 @@ const { success, error } = require('../utils/responseWrapper')
 const signupController = async (req, res) => {
     try {
 
-        const { email, password } = req.body
+        const { name, email, password } = req.body
 
         if (!email || !password) {
             res.send(error(400, 'All fields are is required'))
@@ -25,6 +25,7 @@ const signupController = async (req, res) => {
         const hashPassword = await bcrypt.hash(password, 10);
 
         const user = await User.create({   //create a document in MongoDB collection
+            name,
             email,
             password: hashPassword,
         });

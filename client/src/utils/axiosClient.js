@@ -2,7 +2,7 @@ import axios from 'axios'
 import { getItem, KEY_ACCESS_TOKEN, removeItem, setItem } from './localStorage'
 
 export const axiosClient = axios.create({
-    baseURL: "http://localhost:5000",
+    baseURL: process.env.REACT_APP_SERVER_BASE_URL,
     withCredentials: true,
 
 })
@@ -12,7 +12,7 @@ axiosClient.interceptors.request.use(
     (request) => {
 
         const accessToken = getItem(KEY_ACCESS_TOKEN);
-        request.headers['Authorization'] = `Bearer ${accessToken}`;
+        request.headers['Authorization'] = `Bearer${accessToken}`;
         //console.log('interceptor', request.headers.Authorization);
         return request;
 
@@ -39,7 +39,7 @@ axiosClient.interceptors.response.use(
 
         //check if 401 and also check if /auth/refresh is called
         //so if above condn is true we logout the user and redirect to /login
-        if (statusCode === 401 && originalRequest.url === 'http://localhost:3000/auth/refresh') {
+        if (statusCode === 401 && originalRequest.url === `${process.env.REACT_APP_SERVER_BASE_URL}/auth/refresh`) {
             removeItem(KEY_ACCESS_TOKEN)
             window.location.replace('/login', '_self')
             return Promise.reject(error)
