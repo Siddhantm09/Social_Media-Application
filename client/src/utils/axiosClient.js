@@ -12,8 +12,8 @@ axiosClient.interceptors.request.use(
     (request) => {
 
         const accessToken = getItem(KEY_ACCESS_TOKEN);
-        request.headers['Authorization'] = `Bearer${accessToken}`;
-        //console.log('interceptor', request.headers.Authorization);
+        request.headers['Authorization'] = `Bearer ${accessToken}`;
+        console.log('interceptor', request.headers.Authorization);
         return request;
 
     }
@@ -26,14 +26,18 @@ axiosClient.interceptors.response.use(
     async (response) => {
 
         const data = response.data;     //axios returns response obj with data in it
-        const originalRequest = response.config //to bring url
-        const error = data.error
-        const statusCode = data.statusCode
-
+        console.log(data);
         //if all ok then return data
         if (data.status === 'ok') {
             return data;
         }
+
+
+        const originalRequest = response.config //to bring url
+        const error = data.error
+        const statusCode = data.statusCode
+
+
 
 
 
@@ -48,17 +52,19 @@ axiosClient.interceptors.response.use(
         //here only access token is expired (refer requireUser.js) 
         //call refresh api silently
         if (statusCode === 401) {
-            const response = await axiosClient.get('/auth/refresh')
+            const response = await axios.create({
+                withCredentials: true,
+            }).get(`${process.env.REACT_APP_SERVER_BASE_URL}/auth/refresh`)
 
-            console.log('got new AT', response);
+            console.log('got new AT', response.data);
 
             // here accestoken is retrieved from '/auth/refresh' if status is 'ok',we get new access token
-            if (response.status === 'ok') {
-                setItem(KEY_ACCESS_TOKEN, response.result.accessToken)
+            if (response.data.status === 'ok') {
+                setItem(KEY_ACCESS_TOKEN, response.data.result.accessToken)
 
                 //here originalRequest is '/posts/all'
                 //we put the Authorization and accessToken to the originalRequest
-                originalRequest.headers['Authorization'] = `Bearer ${response.result.accessToken}`;
+                originalRequest.headers['Authorization'] = `Bearer ${response.data.result.accessToken}`;
                 // console.log("og", originalRequest.headers.Authorization);
                 return axios(originalRequest)
 
