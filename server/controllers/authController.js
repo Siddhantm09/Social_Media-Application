@@ -10,7 +10,7 @@ const signupController = async (req, res) => {
 
         const { name, email, password } = req.body
 
-        if (!email || !password) {
+        if (!email || !password || !name) {
             res.send(error(400, 'All fields are is required'))
         }
 
@@ -30,11 +30,11 @@ const signupController = async (req, res) => {
             password: hashPassword,
         });
 
-        return res.send(success(201, { user }));
+        return res.send(success(201, 'User created sucessfully'));
 
 
-    } catch (err) {
-        console.log(err);
+    } catch (e) {
+        return res.send(error(500, e.message)) //500->error from server
     }
 }
 
@@ -50,8 +50,8 @@ const loginController = async (req, res) => {
             res.send(error(400, 'All fields are is required'))
         }
 
-
-        const users = await User.findOne({ email });//find if email already exists in MongoDB collection
+        //findOne cannot access pw in line(61) therefore sending password using .select
+        const users = await User.findOne({ email }).select('+password');//find if email already exists in MongoDB collection
 
         if (!users) {
             res.send(error(400, 'Invalid Email'))
@@ -76,8 +76,8 @@ const loginController = async (req, res) => {
 
         return res.send(success(200, { accessToken }));
 
-    } catch (err) {
-        console.log(err);
+    } catch (e) {
+        return res.send(error(500, e.message)) //500->error from server
     }
 };
 
@@ -123,7 +123,7 @@ const refreshAccessTokenController = async (req, res) => {
 const generateAccessToken = (data) => {
     try {
         const token = jwt.sign(data, process.env.SECRET_ACCESS_TOKEN_KEY, {
-            expiresIn: "2m",
+            expiresIn: "20m",
         });
 
         return token;

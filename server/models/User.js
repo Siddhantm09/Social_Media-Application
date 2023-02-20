@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema({
     name: {
@@ -10,13 +10,28 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        lowercase: true
-    }
-    ,
+        lowercase: true,
+    },
     password: {
         type: String,
-        required: true
-
-    }
-})
-module.exports = mongoose.model('User', userSchema)
+        required: true,
+        select: false      //will not send password when using (findbyId etc )
+    },
+    avatar: {
+        publicId: String,
+        url: String,
+    },
+    followers: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user",
+    }],
+    followings: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user",
+    }],
+    posts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'post',
+    }],
+});
+module.exports = mongoose.model("user", userSchema);
