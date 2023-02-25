@@ -32,5 +32,37 @@ const createPostController = async (req, res) => {
     }
 };
 
+const likeAndUnlikePost = async (req, res) => {
 
-module.exports = { getAllPostsController, createPostController };
+    try {
+        const { postId } = req.body;
+        const currUserId = req._id
+
+        const post = await Post.findById(postId);
+
+        if (!post) {
+            return res.send(error(400, 'No Posts found'))
+        }
+
+        if (post.likes.includes(currUserId)) {
+            const index = post.likes.indexOf(currUserId)
+            post.likes.splice(index, 1);
+
+            await post.save();
+            return res.send(success(200, "Post Unliked"))
+        }
+        else {
+            post.likes.push(currUserId)
+            await post.save()
+            return res.send(success(200, "Post liked"))
+        }
+
+    } catch (error) {
+        return res.send(error(500, e.message))
+    }
+
+
+}
+
+
+module.exports = { getAllPostsController, createPostController, likeAndUnlikePost };
