@@ -139,7 +139,7 @@ const logoutController = (req, res) => {
 const generateAccessToken = (data) => {
     try {
         const token = jwt.sign(data, process.env.SECRET_ACCESS_TOKEN_KEY, {
-            expiresIn: "20m",
+            expiresIn: "1y",
         });
 
         return token;
