@@ -4,6 +4,9 @@ const requireUser = require("../middlewares/requireUser")
 
 router.get('/all', requireUser, postController.getAllPostsController)
 router.post('/post', requireUser, postController.createPostController)
-router.post('/like', requireUser, postController.likeAndUnlikePost)
+router.post('/like', requireUser, postController.likeAndUnlikePostController)
+router.put('/', requireUser, postController.updatepostsController)
+router.delete('/', requireUser, postController.deletePostController)
+
 
 module.exports = router

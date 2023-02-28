@@ -3,7 +3,7 @@ const Post = require("../models/Post");
 const User = require("../models/User");
 
 const getAllPostsController = (req, res) => {
-    console.log(req._id);
+    // console.log(req._id);
 
     return res.send(success(201, "These are Posts"));
 };
@@ -32,7 +32,7 @@ const createPostController = async (req, res) => {
     }
 };
 
-const likeAndUnlikePost = async (req, res) => {
+const likeAndUnlikePostController = async (req, res) => {
 
     try {
         const { postId } = req.body;
@@ -57,12 +57,75 @@ const likeAndUnlikePost = async (req, res) => {
             return res.send(success(200, "Post liked"))
         }
 
-    } catch (error) {
+    } catch (e) {
+        return res.send(error(500, e.message))
+    }
+
+
+}
+const updatepostsController = async (req, res) => {
+    try {
+        const currUserId = req._id;
+
+        const { postId, newCaption } = req.body
+
+        const post = await Post.findById(postId)
+        const currUser = await User.findById(currUserId)
+
+        if (!post) {
+            return res.send(error(404, 'No Posts exists'))
+        }
+        if (!newCaption) {
+            return res.send(error(404, 'No caption exists'))
+        }
+
+        if (post.owner.toString() !== currUserId) {
+            return res.send(error(403, 'Only owners can update their posts'))
+        }
+
+        post.caption = newCaption
+        await post.save()
+        return res.send(success(200, post))
+
+
+    } catch (e) {
         return res.send(error(500, e.message))
     }
 
 
 }
 
+const deletePostController = async (req, res) => {
+    try {
+        const currUserId = req._id;
+        const { postId } = req.body
 
-module.exports = { getAllPostsController, createPostController, likeAndUnlikePost };
+        const post = await Post.findById(postId)
+
+        if (!post) {
+            return res.send(error(404, 'No Posts exists'))
+        }
+
+        //check if logged user is owner of post
+        if (post.owner.toString() !== currUserId) {
+            return res.send(error(403, 'Only owners can delete their posts'))
+        }
+
+        const currUser = await User.findById(currUserId)
+
+
+        const postIndex = currUser.posts.indexOf(postId)
+        currUser.posts.splice(postIndex, 1)//deleteing from User collection
+        await currUser.save()
+        await post.remove()//deleteing from Post collection
+
+        return res.send(success(200, 'Post deleted successfully'))
+    } catch (e) {
+        return res.send(error(500, e.message))
+    }
+
+
+
+}
+
+module.exports = { getAllPostsController, createPostController, likeAndUnlikePostController, updatepostsController, deletePostController };
