@@ -92,10 +92,13 @@ const getMyPostsController = async (req, res) => {
     }
 
 };
+
+
+
 const deleteMyProfileController = async (req, res) => {
     try {
         const currUserId = req._id
-        console.log(currUserId);
+
         const currUser = await User.findById(currUserId);
 
         if (!currUser) {
@@ -104,62 +107,59 @@ const deleteMyProfileController = async (req, res) => {
 
 
 
-        //remove from other users followers
-        const usersFromFollowers = await User.find({
+        //user jiska followers and followings me current id hai
+        const users = await User.find({
+
             followers: {
                 $in: currUser._id,
-            },
-        })
-
-        if (!usersFromFollowers) {
-            return res.send(error(404, "No such followers exists"));
-        }
-        else {
-            usersFromFollowers.map(async (key) => {
-                const index = key.followers.indexOf(currUserId)
-
-                key.followers.splice(index, 1)
-                await key.save()
-            })
-        }
-
-
-
-
-        //remove from  other users followings
-        const usersFromFollowing = await User.find({
-            followings: {
+            }, followings: {
                 $in: currUser._id,
             },
-        })
-        if (!usersFromFollowing) {
-            return res.send(error(404, "No such followings exists"));
-        }
-        else {
-            usersFromFollowing.map(async (key) => {
-                const index2 = key.followings.indexOf(currUserId)
 
-                key.followings.splice(index2, 1)
-                await key.save()
+        })
+
+        //posts jiska owner me curr id hai
+        const posts = await Post.find({
+            owner: {
+                $in: currUser._id,
+            }
+        })
+
+        //remove posts
+        if (posts) {
+            posts.map(async (key) => {
+
+                key.remove()
+
             })
         }
+
+
+        //if no followers or following exists(Note:users,posts is array which returns details in objects)
+        if (users.length === 0) {
+            await currUser.remove()//remove currUser collection
+            return res.send(error(404, "No followers or followings,User deleted successfully"));
+        }
+        //remove from other users followers and followings
+        else {
+
+            users.map(async (key) => {
+                const index = key.followers.indexOf(currUserId)
+                const index2 = key.followings.indexOf(currUserId)
+
+                key.followers.splice(index, 1)
+                key.followings.splice(index2, 1)
+                await key.save()
+                await currUser.remove()//remove currUser collection
+                return res.send(success(200, 'User deleted successfully'));
+            })
+        }
+
     } catch (e) {
         return res.send(error(500, e.message));
     }
 
-
-
-
-
-    //remove his posts
-    //remove his likes from other users posts
-
-    //await currUser.remove()//delete user finally
-
-};
-
-
-
+}
 const getOtherUsersPostsController = async (req, res) => {
     try {
         const currUserId = req._id
@@ -196,4 +196,4 @@ module.exports = {
     deleteMyProfileController,
     getOtherUsersPostsController
 
-};
+}
