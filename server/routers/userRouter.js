@@ -8,5 +8,5 @@ router.get('/seePosts', requireUser, userControllers.seeAllPostsControllers)
 router.delete('/deleteprofile', requireUser, userControllers.deleteMyProfileController)
 router.get('/myposts', requireUser, userControllers.getMyPostsController)
 router.get('/userposts', requireUser, userControllers.getOtherUsersPostsController)
-
+router.get('/myprofile', requireUser, userControllers.getMyProfileController)
 module.exports = router

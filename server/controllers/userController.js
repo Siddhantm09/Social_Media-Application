@@ -72,21 +72,24 @@ const getMyPostsController = async (req, res) => {
     try {
         const currUserId = req._id
 
-
         const currUser = await User.findById(currUserId);
 
-        const myPosts = await Post.find({
-            owner: {
-                $in: currUser._id,
-            },
-        })
+        //check if user exists in DB(will exist by default)
+        if (currUser) {
+            const myPosts = await Post.find({  //returns an array of obj
+                owner: currUserId
 
-        if (!myPosts) {
-            return res.send(error(404, "No Posts exists"));
-        } else {
-            return res.send(success(200, myPosts));
+            }).populate('likes')
+            if (!myPosts) {
+                return res.send(error(404, "No Posts exists"));
+            } else {
+                return res.send(success(200, myPosts));
 
+            }
         }
+
+
+
     } catch (e) {
         return res.send(error(500, e.message));
     }
@@ -95,87 +98,174 @@ const getMyPostsController = async (req, res) => {
 
 
 
+// const deleteMyProfileController = async (req, res) => {
+//     try {
+//         const currUserId = req._id
+
+//         const currUser = await User.findById(currUserId);
+
+//         if (!currUser) {
+//             return res.send(error(404, "No such user exists"));
+//         }
+
+
+
+//         //user jiska followers and followings me current id hai
+//         const users = await User.find({
+
+//             followers: {
+//                 $in: currUser._id,
+//             }, followings: {
+//                 $in: currUser._id,
+//             },
+
+//         })
+
+//         //posts jiska owner me curr id hai
+//         const posts = await Post.find({
+//             owner: {
+//                 $in: currUser._id,
+//             }
+//         })
+
+//         //remove posts
+//         if (posts) {
+//             posts.map(async (key) => {
+
+//                 key.remove()
+
+//             })
+//         }
+
+
+//         //if no followers or following exists(Note:users,posts is array which returns details in objects)
+//         if (users.length === 0) {
+//             await currUser.remove()//remove currUser collection
+//             return res.send(error(404, "No followers or followings,User deleted successfully"));
+//         }
+//         //remove from other users followers and followings
+//         else {
+
+//             users.map(async (key) => {
+//                 const index = key.followers.indexOf(currUserId)
+//                 const index2 = key.followings.indexOf(currUserId)
+
+//                 key.followers.splice(index, 1)
+//                 key.followings.splice(index2, 1)
+//                 await key.save()
+//                 await currUser.remove()//remove currUser collection
+//                 return res.send(success(200, 'User deleted successfully'));
+//             })
+//         }
+
+//     } catch (e) {
+//         return res.send(error(500, e.message));
+//     }
+
+// }
+
+
 const deleteMyProfileController = async (req, res) => {
+
     try {
         const currUserId = req._id
-
         const currUser = await User.findById(currUserId);
 
-        if (!currUser) {
-            return res.send(error(404, "No such user exists"));
-        }
+        //delete all posts
+        await Post.deleteMany({
+            owner: currUserId
+        })
+
+
+        currUser.followers.forEach(async (followerId) => {
+            const follower = await User.findById(followerId);
+            //console.log('follower', follower);
+            const index = follower.followings.indexOf(currUserId);
+            console.log('index', index);
+            follower.followings.splice(index, 1);
+            //console.log('after splice', follower.followings);
+            await follower.save();
+            //console.log("after save 184", follower);
+        });
+
+        // remove myself from my followings' followers
+        currUser.followings.forEach(async (followingId) => {
+            const following = await User.findById(followingId);
+            //console.log("following", following);
+            const index = following.followers.indexOf(currUserId);
+            // console.log("index", index);
+            following.followers.splice(index, 1);
+            console.log(following.followers);
+            await following.save();
+            //console.log("after save 196", following);
+        });
+
+
+        //remove myself from others posts likes(my way)
+        // const posts = await Post.find({
+        //     likes: {
+        //         $in: currUser._id,
+        //     }
+        // })
+        // console.log(posts);
+        // posts.map((key) => {  
+        //     const likesArray = key.likes
+        //     const index = likesArray.indexOf(currUserId)
+        //     likesArray.splice(index, 1)
+        //     key.save()
+        // })
+
+        //remove myself from others posts likes(sir's way)
+        const allPosts = await Post.find();
+        allPosts.forEach(async (post) => {
+            const index = post.likes.indexOf(currUserId)
+            post.likes.splice(index, 1)
+            await post.save()
+        })
 
 
 
-        //user jiska followers and followings me current id hai
-        const users = await User.find({
+        await currUser.remove()//remove user from backend
 
-            followers: {
-                $in: currUser._id,
-            }, followings: {
-                $in: currUser._id,
-            },
+
+        res.clearCookie("jwt", {
+            httpOnly: true,
+            secure: true,
 
         })
 
-        //posts jiska owner me curr id hai
-        const posts = await Post.find({
-            owner: {
-                $in: currUser._id,
-            }
-        })
-
-        //remove posts
-        if (posts) {
-            posts.map(async (key) => {
-
-                key.remove()
-
-            })
-        }
-
-
-        //if no followers or following exists(Note:users,posts is array which returns details in objects)
-        if (users.length === 0) {
-            await currUser.remove()//remove currUser collection
-            return res.send(error(404, "No followers or followings,User deleted successfully"));
-        }
-        //remove from other users followers and followings
-        else {
-
-            users.map(async (key) => {
-                const index = key.followers.indexOf(currUserId)
-                const index2 = key.followings.indexOf(currUserId)
-
-                key.followers.splice(index, 1)
-                key.followings.splice(index2, 1)
-                await key.save()
-                await currUser.remove()//remove currUser collection
-                return res.send(success(200, 'User deleted successfully'));
-            })
-        }
-
+        return res.send(success(200, 'successfull'));
     } catch (e) {
         return res.send(error(500, e.message));
     }
 
+
+
+
 }
+
+
+
 const getOtherUsersPostsController = async (req, res) => {
     try {
         const currUserId = req._id
         const { otheruserId } = req.body
-        const currUser = await User.findById(currUserId);
-        const otherUser = await User.findById(otheruserId);
 
+        if (!otheruserId) {
+
+            return res.send(error(400, 'user id is required'))
+
+        }
+        const currUser = await User.findById(currUserId);
+
+        //check if your follow that user
         if (!currUser.followings.includes(otheruserId)) {
             return res.send(error(404, 'You dont follow this user'));
         }
 
         const otherUserPosts = await Post.find({
-            owner: {
-                $in: otherUser._id,
-            }
-        })
+            owner: otheruserId
+        }).populate('likes')
 
         return res.send(success(200, otherUserPosts));
 
@@ -186,14 +276,21 @@ const getOtherUsersPostsController = async (req, res) => {
 
 };
 
+const getMyProfileController = async (req, res) => {
+    const currUserId = req._id;
+    console.log(currUserId);
+    const currUser = await User.findById(currUserId).populate('likes');
+    if (currUser) {
+        return res.send(success(200, currUser));
+    }
+}
 
-
-
+console.log("hello");
 module.exports = {
     followAndUnfollowUserController,
     seeAllPostsControllers,
     getMyPostsController,
     deleteMyProfileController,
-    getOtherUsersPostsController
-
+    getOtherUsersPostsController,
+    getMyProfileController
 }
