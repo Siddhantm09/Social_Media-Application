@@ -17,3 +17,40 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+:root {
+  --border-color: #ddd;
+  --accent-color: #458eff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #212121;
+}
+
+h3,
+h6 {
+  font-weight: 400;
+}
+
+p {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.hover-link {
+  cursor: pointer;
+}
+
+.hover-link:active {
+  color: red;
+}
+
+.container {
+  max-width: 960px;
+  margin-inline: auto;
+}

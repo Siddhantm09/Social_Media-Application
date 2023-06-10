@@ -1,0 +1,11 @@
+.Feed {
+  .container {
+    display: flex;
+  }
+  .left-part {
+    flex: 2;
+  }
+  .right-part {
+    flex: 1;
+  }
+}
