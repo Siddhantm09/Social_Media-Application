@@ -2,5 +2,15 @@
   margin-top: 20px;
   display: flex;
   align-items: center;
-  //justify-content: space-between;
+  justify-content: space-between;
+  height: 60px;
+
+  .user-info {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+  }
+  .follow-link {
+    color: var(--accent-color);
+  }
 }

@@ -1,11 +1,23 @@
 .Feed {
   .container {
     display: flex;
-  }
-  .left-part {
-    flex: 2;
-  }
-  .right-part {
-    flex: 1;
+    gap: 20px;
+    overflow: hidden;
+
+    .left-part {
+      flex: 2;
+      overflow-y: auto;
+    }
+    .right-part {
+      flex: 1;
+      margin-top: 20px;
+    }
+    .suggestions {
+      margin-top: 40px;
+    }
+
+    .title {
+      margin-bottom: 12px;
+    }
   }
 }
