@@ -10,5 +10,17 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    .right-side {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      .logout {
+        align-items: center;
+        font-size: 1.8rem;
+        justify-content: center;
+      }
+    }
   }
 }

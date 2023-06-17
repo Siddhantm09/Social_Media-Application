@@ -1,6 +1,7 @@
 //
 import Navbar from "../../components/navbar/Navbar";
 import { Outlet } from "react-router";
+import "./home.scss";
 
 const Home = () => {
   // useEffect(() => {
@@ -14,7 +15,9 @@ const Home = () => {
   return (
     <div>
       <Navbar />
-      <Outlet />
+      <div className="outlet">
+        <Outlet />
+      </div>
     </div>
   );
 };
