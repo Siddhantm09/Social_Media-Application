@@ -28,7 +28,6 @@ const Feed = () => {
                         <Follower />
                         <Follower />
                     </div>
-
                 </div>
             </div>
         </div>

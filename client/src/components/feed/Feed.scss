@@ -1,8 +1,9 @@
 .Feed {
+  margin-top: 60px;
+  // height: 100vh;
   .container {
     display: flex;
     gap: 20px;
-    overflow: hidden;
 
     .left-part {
       flex: 2;

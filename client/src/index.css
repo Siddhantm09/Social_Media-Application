@@ -54,3 +54,38 @@ p {
   max-width: 960px;
   margin-inline: auto;
 }
+
+.btn-primary {
+  background-color: var(--accent-color);
+  color: white;
+  font-weight: bold;
+  padding: 10px 40px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #72a2e9;
+}
+
+.btn-primary:active {
+  background-color: var(--accent-color);
+}
+
+.btn-secondary {
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  font-weight: bold;
+  padding: 10px 40px;
+  border-radius: 4px;
+  cursor: pointer;
+  /* background: none; */
+}
+.btn-secondary:hover {
+  background-color: #ddd;
+}
+
+.btn-secondary:active {
+  background: none;
+}
