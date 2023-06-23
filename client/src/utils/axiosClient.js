@@ -42,16 +42,17 @@ axiosClient.interceptors.response.use(
 
 
         //check if 401 and also check if /auth/refresh is called
-        //so if above condn is true we logout the user and redirect to /login
-        if (statusCode === 401 && originalRequest.url === `${process.env.REACT_APP_SERVER_BASE_URL}/auth/refresh`) {
-            removeItem(KEY_ACCESS_TOKEN)
-            window.location.replace('/login', '_self')
-            return Promise.reject(error)
-        }
+        //so if below condn is true we logout the user and redirect to /login
+        // if (statusCode === 401 && originalRequest.url === `${process.env.REACT_APP_SERVER_BASE_URL}/auth/refresh`) {
+        //     removeItem(KEY_ACCESS_TOKEN)
+        //     window.location.replace('/login', '_self')
+        //     return Promise.reject(error)
+        // }
 
         //here only access token is expired (refer requireUser.js) 
         //call refresh api silently
-        if (statusCode === 401) {
+        if (statusCode === 401 && !originalRequest._retry) {
+            originalRequest._retry = true
             const response = await axios.create({
                 withCredentials: true,
             }).get(`${process.env.REACT_APP_SERVER_BASE_URL}/auth/refresh`)
@@ -68,6 +69,12 @@ axiosClient.interceptors.response.use(
                 // console.log("og", originalRequest.headers.Authorization);
                 return axios(originalRequest)
 
+            }
+            //here refresh token in expired
+            else {
+                removeItem(KEY_ACCESS_TOKEN)
+                window.location.replace('/login', '_self')
+                return Promise.reject(error)
             }
         }
         return Promise.reject(error)
