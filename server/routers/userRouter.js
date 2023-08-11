@@ -9,4 +9,5 @@ router.delete('/deleteprofile', requireUser, userControllers.deleteMyProfileCont
 router.get('/myposts', requireUser, userControllers.getMyPostsController)
 router.get('/userposts', requireUser, userControllers.getOtherUsersPostsController)
 router.get('/myprofile', requireUser, userControllers.getMyProfileController)
+
 module.exports = router

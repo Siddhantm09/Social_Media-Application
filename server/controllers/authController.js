@@ -96,7 +96,7 @@ const refreshAccessTokenController = async (req, res) => {
 
     const refreshToken = cookies.jwt;
 
-
+    //Convert this code into TypeScript
 
     try {
         const decoded = jwt.verify(
