@@ -238,13 +238,7 @@ const deleteMyProfileController = async (req, res) => {
     } catch (e) {
         return res.send(error(500, e.message));
     }
-
-
-
-
 }
-
-
 
 const getOtherUsersPostsController = async (req, res) => {
     try {
@@ -277,21 +271,36 @@ const getOtherUsersPostsController = async (req, res) => {
 };
 
 const getMyProfileController = async (req, res) => {
-    const currUserId = req._id;
-    console.log(currUserId);
-
-    const currUser = await User.findById(currUserId).populate('posts');
-    if (currUser) {
-        return res.send(success(200, currUser));
+    try {
+        const currUserId = req._id;
+        const currUser = await User.findById(currUserId).populate('posts');
+        if (currUser) {
+            return res.send(success(200, currUser));
+        }
+    } catch (e) {
+        return res.send(error(500, e.message));
     }
+
 }
 
-console.log("hello");
+const getMyInfo = async (req, res) => {
+    try {
+        const currUserId = req._id;
+        const currUser = await User.findById(currUserId);
+        if (currUser) {
+            return res.send(success(200, currUser));
+        }
+    } catch (e) {
+        return res.send(error(500, e.message));
+    }
+
+}
 module.exports = {
     followAndUnfollowUserController,
     seeAllPostsControllers,
     getMyPostsController,
     deleteMyProfileController,
     getOtherUsersPostsController,
-    getMyProfileController
+    getMyProfileController,
+    getMyInfo
 }

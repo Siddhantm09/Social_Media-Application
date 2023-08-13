@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux'
 function App() {
   const loadingRef = useRef(null)
   const isloading = useSelector((state) => state.appConfigSlice.isloading)
-  console.log(isloading);
+
 
   useEffect(() => {
     if (isloading) {
@@ -27,7 +27,7 @@ function App() {
     <div className="App">
       <LoadingBar color='#000' ref={loadingRef} />
       <Routes>
-        <Route element={<RequireUser />}>-----------------------------------------
+        <Route element={<RequireUser />}>
           <Route element={<Home />} >
             <Route path="/" element={<Feed />} />
             <Route path="/profile/:userId" element={<Profile />} />

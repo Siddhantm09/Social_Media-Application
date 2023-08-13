@@ -1,16 +1,15 @@
-//
+import { useEffect } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import { Outlet } from "react-router";
 import "./home.scss";
+import { useDispatch } from "react-redux";
+import { getMyInfo } from "../../redux/slices/appConfigSlice";
 
 const Home = () => {
-  // useEffect(() => {
-  //   fetchAllPosts();
-  // }, []);
-  // const fetchAllPosts = async () => {
-  //   const response = await axiosClient.get("/posts/all");
-  //   console.log("postResponse", response);
-  // };
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getMyInfo());
+  }, []);
 
   return (
     <div>

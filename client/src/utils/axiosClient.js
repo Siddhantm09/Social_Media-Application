@@ -13,7 +13,7 @@ axiosClient.interceptors.request.use(
 
         const accessToken = getItem(KEY_ACCESS_TOKEN);
         request.headers['Authorization'] = `Bearer ${accessToken}`;
-        console.log('interceptor', request.headers.Authorization);
+        // console.log('interceptor', request.headers.Authorization);
         return request;
 
     }
