@@ -279,7 +279,8 @@ const getOtherUsersPostsController = async (req, res) => {
 const getMyProfileController = async (req, res) => {
     const currUserId = req._id;
     console.log(currUserId);
-    const currUser = await User.findById(currUserId).populate('likes');
+
+    const currUser = await User.findById(currUserId).populate('posts');
     if (currUser) {
         return res.send(success(200, currUser));
     }

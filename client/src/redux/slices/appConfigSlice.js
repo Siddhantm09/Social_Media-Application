@@ -1,4 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+const getMyInfo = createAsyncThunk('users/myprofileInfo', (body, thunkAPI) => { })
+
+
+
 
 const appConfigSlice = createSlice({
     name: 'appConfigSlice',
@@ -11,5 +15,5 @@ const appConfigSlice = createSlice({
         }
     }
 })
-
-export default appConfigSlice.reducer
+export const { setLoading } = appConfigSlice.actions
+export default appConfigSlice.reducer 
