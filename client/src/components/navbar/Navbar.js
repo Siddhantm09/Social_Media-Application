@@ -3,16 +3,15 @@ import Avatar from '../avatar/Avatar'
 import './Navbar.scss'
 import { AiOutlineLogout } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { setLoading } from '../../redux/slices/appConfigSlice'
+import { useSelector } from 'react-redux'
+
 
 const Navbar = () => {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
+    const handleLogoutClicked = () => { }
 
-    const toogleLoadingBar = () => {
-        dispatch(setLoading(true))
-    }
+    const navigate = useNavigate()
+    const myProfile = useSelector((state) => state.appConfigSlice.myProfile)
+    console.log(myProfile);
 
     return (
         <div className='Navbar'>
@@ -20,10 +19,11 @@ const Navbar = () => {
             <div className='container'>
                 <h2 className='social-banner hover-link' onClick={() => navigate('/')} > Social Media</h2>
                 <div className='right-side'>
-                    <div className='profile hover-link' onClick={() => navigate('/profile/dummyid')}>
+                    <div className='profile hover-link' onClick={() => navigate(`/profile/${myProfile._id}`)}>
                         <Avatar />
+                        {/* //add detail */}
                     </div>
-                    <div className='hover-link logout' onClick={toogleLoadingBar}>
+                    <div className='hover-link logout' onClick={handleLogoutClicked} >
                         <AiOutlineLogout />
                     </div>
                 </div>

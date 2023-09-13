@@ -286,9 +286,9 @@ const getMyProfileController = async (req, res) => {
 const getMyInfo = async (req, res) => {
     try {
         const currUserId = req._id;
-        const currUser = await User.findById(currUserId);
+        const currUser = await User.findById(currUserId).populate('posts');
         if (currUser) {
-            return res.send(success(200, currUser));
+            return res.send(success(200, { currUser }));
         }
     } catch (e) {
         return res.send(error(500, e.message));

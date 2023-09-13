@@ -50,7 +50,7 @@ const loginController = async (req, res) => {
             res.send(error(400, 'All fields are is required'))
         }
 
-        //findOne cannot access pw in line(61) therefore sending password using .select
+        //findOne cannot access pw in line(61) therefore sending password(hashed) using .select
         const users = await User.findOne({ email }).select('+password');//find if email already exists in MongoDB collection
 
         if (!users) {
@@ -139,7 +139,7 @@ const logoutController = (req, res) => {
 const generateAccessToken = (data) => {
     try {
         const token = jwt.sign(data, process.env.SECRET_ACCESS_TOKEN_KEY, {
-            expiresIn: "1y",
+            expiresIn: "20m",
         });
 
         return token;

@@ -11,6 +11,7 @@ module.exports = async () => {
             useNewUrlParser: true, useUnifiedTopology: true
         })
         console.log(`MongoDb connected :${connect.connection.host}`);
+
     }
 
 

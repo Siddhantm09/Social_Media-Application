@@ -19,6 +19,7 @@ const Login = () => {
       });
 
       setItem(KEY_ACCESS_TOKEN, result.result.accessToken);
+
       navigate("/");
     } catch (error) {
       console.log(error);

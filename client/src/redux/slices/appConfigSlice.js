@@ -5,7 +5,8 @@ export const getMyInfo = createAsyncThunk('users/myprofileInfo', async (body, th
     try {
         thunkAPI.dispatch(setLoading(true))
         const response = await axiosClient('/user/getMyInfo')
-        console.log(response);
+        return response.result.currUser
+        // console.log(response);
     } catch (error) {
         return Promise.reject(error)
     }
@@ -26,8 +27,11 @@ const appConfigSlice = createSlice({
 
             state.isloading = action.payload
         }
+    },
+    extraReducers: (builder) => {
+
+        builder.addCase(getMyInfo.fulfilled, (state, action) => { state.myProfile = action.payload })
     }
-    ,
 })
 export const { setLoading } = appConfigSlice.actions
 export default appConfigSlice.reducer 
