@@ -71,7 +71,7 @@ const loginController = async (req, res) => {
             secure: true,
         });
 
-        return res.send(success(200, { accessToken }, console.log("Access")));
+        return res.send(success(200, { accessToken }));
 
     } catch (e) {
         return res.send(error(500, e.message)) //500->error from server
@@ -138,7 +138,7 @@ const logoutController = (req, res) => {
 const generateAccessToken = (data) => {
     try {
         const token = jwt.sign(data, process.env.SECRET_ACCESS_TOKEN_KEY, {
-            expiresIn: "20m",
+            expiresIn: "30s",
         });
 
         return token;

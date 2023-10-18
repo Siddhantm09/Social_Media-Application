@@ -7,12 +7,13 @@ module.exports = async (req, res, next) => {
     //Check if Authorization header (startsWith("Bearer")) is present
 
     if (!req.headers?.authorization?.startsWith("Bearer")) {
+        console.log('Middleware');
         return res.send(error(401, "Authorization header is required"));
     }
 
     const accessToken = req.headers.authorization.split(" ")[1];
 
-    console.log(accessToken);
+
     //verify the access Token valid/expired or not
     try {
         //Returns the payload decoded if the signature is valid and optional expiration, audience, or issuer are valid.If not, it will throw the error.
