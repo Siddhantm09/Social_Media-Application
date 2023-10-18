@@ -13,7 +13,7 @@ axiosClient.interceptors.request.use(
 
         const accessToken = getItem(KEY_ACCESS_TOKEN);
         request.headers['Authorization'] = `Bearer ${accessToken}`;
-        // console.log('interceptor', request.headers.Authorization);
+        // console.log('req interceptor', request.headers.Authorization);
         return request;
 
     }
@@ -26,7 +26,7 @@ axiosClient.interceptors.response.use(
     async (response) => {
 
         const data = response.data;     //axios returns response obj with data in it
-        console.log(data);
+
         //if all ok then return data
         if (data.status === 'ok') {
             return data;

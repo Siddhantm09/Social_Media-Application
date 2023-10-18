@@ -7,11 +7,17 @@ const userRouter = require("./routers/userRouter");
 const morgan = require("morgan");
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
-
+// import { v2 as cloudinary } from 'cloudinary';
 
 dotenv.config('./.env')
 
 
+
+// cloudinary.config({
+//     cloud_name: process.env.CLOUD_NAME,
+//     api_key: process.env.API_KEY,
+//     api_secret: process.env.API_SECRET_KEY
+// });
 
 const app = express()
 

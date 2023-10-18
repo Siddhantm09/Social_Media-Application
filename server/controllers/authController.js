@@ -3,8 +3,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken")
 const { success, error } = require('../utils/responseWrapper')
 
-
-
 const signupController = async (req, res) => {
     try {
 
@@ -39,13 +37,12 @@ const signupController = async (req, res) => {
 }
 
 
-
 const loginController = async (req, res) => {
     try {
 
         const { email, password } = req.body;
 
-
+        console.log('Access Token');
         if (!email || !password) {
             res.send(error(400, 'All fields are is required'))
         }
@@ -74,7 +71,7 @@ const loginController = async (req, res) => {
             secure: true,
         });
 
-        return res.send(success(200, { accessToken }));
+        return res.send(success(200, { accessToken }, console.log("Access")));
 
     } catch (e) {
         return res.send(error(500, e.message)) //500->error from server
@@ -116,6 +113,8 @@ const refreshAccessTokenController = async (req, res) => {
         return res.send(error(401, '"Login Again - Refresh token expired"'))
     }
 };
+
+
 
 const logoutController = (req, res) => {
     try {

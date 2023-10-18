@@ -7,7 +7,6 @@ module.exports = async (req, res, next) => {
     //Check if Authorization header (startsWith("Bearer")) is present
 
     if (!req.headers?.authorization?.startsWith("Bearer")) {
-
         return res.send(error(401, "Authorization header is required"));
     }
 
@@ -39,5 +38,4 @@ module.exports = async (req, res, next) => {
         return res.send(error(401, 'Access Token Invalid / expired'));
 
     }
-
 };

@@ -295,6 +295,17 @@ const getMyInfo = async (req, res) => {
     }
 
 }
+
+const updateProfileController = async (req, res) => {
+    try {
+        const { name, bio, userImg } = req.body;
+        const user = await User.findById(req._id)
+        console.log(user, "updateController");
+    } catch (e) {
+        return res.send(error(500, e.message));
+    }
+
+}
 module.exports = {
     followAndUnfollowUserController,
     seeAllPostsControllers,
@@ -303,4 +314,5 @@ module.exports = {
     getOtherUsersPostsController,
     getMyProfileController,
     getMyInfo
+    , updateProfileController
 }

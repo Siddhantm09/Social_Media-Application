@@ -15,7 +15,18 @@ export const getMyInfo = createAsyncThunk('users/myprofileInfo', async (body, th
     }
 })
 
+export const updateProfileThunk = createAsyncThunk('user/updateProfile', async (body, thunkAPI) => {
+    thunkAPI.dispatch(setLoading(true))
+    try {
+        const user = await axiosClient.put('/user/updateProfile', body)
+        console.log(user, "thunkUser");
+    } catch (error) {
 
+    }
+    finally {
+        thunkAPI.dispatch(setLoading(false))
+    }
+})
 
 
 const appConfigSlice = createSlice({

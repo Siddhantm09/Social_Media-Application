@@ -17,7 +17,7 @@ const Login = () => {
         email,
         password,
       });
-
+      console.log(result.result.accessToken, "Login");
       setItem(KEY_ACCESS_TOKEN, result.result.accessToken);
 
       navigate("/");

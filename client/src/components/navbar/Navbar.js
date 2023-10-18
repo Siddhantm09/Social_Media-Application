@@ -11,7 +11,7 @@ const Navbar = () => {
 
     const navigate = useNavigate()
     const myProfile = useSelector((state) => state.appConfigSlice.myProfile)
-    console.log(myProfile);
+
 
     return (
         <div className='Navbar'>
