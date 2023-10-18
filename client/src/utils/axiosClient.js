@@ -42,7 +42,6 @@ axiosClient.interceptors.response.use(
 
 
 
-
         //check if 401 and also check if /auth/refresh is called
         //so if below condn is true we logout the user and redirect to /login
         // if (statusCode === 401 && originalRequest.url === `${process.env.REACT_APP_SERVER_BASE_URL}/auth/refresh`) {
@@ -57,6 +56,7 @@ axiosClient.interceptors.response.use(
             console.log(originalRequest._retry);
 
             originalRequest._retry = true
+            //here we dont use axiosClient.create because it will call the req interceptor and expired AT will be send to middleware from req interceptor with 
             const response = await axios.create({
                 withCredentials: true,
             }).get(`${process.env.REACT_APP_SERVER_BASE_URL}/auth/refresh`)
@@ -67,7 +67,7 @@ axiosClient.interceptors.response.use(
             if (response.data.status === 'ok') {
                 setItem(KEY_ACCESS_TOKEN, response.data.result.accessToken)
 
-                //here originalRequest is '/posts/all'
+
                 //we put the Authorization and accessToken to the originalRequest
                 originalRequest.headers['Authorization'] = `Bearer ${response.data.result.accessToken}`;
                 // console.log("og", originalRequest.headers.Authorization);
