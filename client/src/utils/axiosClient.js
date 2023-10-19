@@ -13,7 +13,7 @@ axiosClient.interceptors.request.use(
 
         const accessToken = getItem(KEY_ACCESS_TOKEN);
         request.headers['Authorization'] = `Bearer ${accessToken}`;
-        console.log('req interceptor', request.headers.Authorization);
+        //console.log('req interceptor', request.headers.Authorization);
         return request;
 
     }
@@ -29,7 +29,7 @@ axiosClient.interceptors.response.use(
 
         //if all ok then return data
         if (data.status === 'ok') {
-            console.log('response interceptor', data);
+            // console.log('response interceptor', data);
             return data;
         }
 
@@ -37,8 +37,8 @@ axiosClient.interceptors.response.use(
         const originalRequest = response.config //to bring url
         const error = data.status
         const statusCode = data.statusCode
-        console.log(originalRequest, error, statusCode);
-        console.log(originalRequest._retry);
+        // console.log(originalRequest, error, statusCode);
+        // console.log(originalRequest._retry);
 
 
 
@@ -53,7 +53,7 @@ axiosClient.interceptors.response.use(
         //here only access token is expired (refer requireUser.js) 
         //call refresh api silently
         if (statusCode === 401 && !originalRequest._retry) {
-            console.log(originalRequest._retry);
+            // console.log(originalRequest._retry);
 
             originalRequest._retry = true
             //here we dont use axiosClient.create because it will call the req interceptor and expired AT will be send to middleware from req interceptor with 
@@ -61,7 +61,7 @@ axiosClient.interceptors.response.use(
                 withCredentials: true,
             }).get(`${process.env.REACT_APP_SERVER_BASE_URL}/auth/refresh`)
 
-            console.log('got new AT', response.data);
+            //console.log('got new AT', response.data);
 
             // here accestoken is retrieved from '/auth/refresh' if status is 'ok',we get new access token
             if (response.data.status === 'ok') {
@@ -71,7 +71,7 @@ axiosClient.interceptors.response.use(
                 //we put the Authorization and accessToken to the originalRequest
                 originalRequest.headers['Authorization'] = `Bearer ${response.data.result.accessToken}`;
                 // console.log("og", originalRequest.headers.Authorization);
-                console.log(originalRequest);
+                // console.log(originalRequest);
                 return axios(originalRequest)
 
             }

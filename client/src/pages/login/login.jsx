@@ -17,7 +17,7 @@ const Login = () => {
         email,
         password,
       });
-      console.log(result.result.accessToken, "Login");
+      // console.log(result.result.accessToken, "Login");
       setItem(KEY_ACCESS_TOKEN, result.result.accessToken);
 
       navigate("/");
@@ -41,6 +41,7 @@ const Login = () => {
           ></input>
           <label htmlFor="password">Password</label>
           <input
+            autoComplete="on"
             type="password"
             className="password"
             id="password"

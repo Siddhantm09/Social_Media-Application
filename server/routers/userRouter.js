@@ -5,11 +5,11 @@ const userControllers = require('../controllers/userController');
 
 router.post('/follow', requireUser, userControllers.followAndUnfollowUserController)
 router.get('/seePosts', requireUser, userControllers.seeAllPostsControllers)
-router.delete('/deleteprofile', requireUser, userControllers.deleteMyProfileController)
+router.delete('/', requireUser, userControllers.deleteMyProfileController)
 router.get('/myposts', requireUser, userControllers.getMyPostsController)
 router.get('/userposts', requireUser, userControllers.getOtherUsersPostsController)
 router.get('/myprofile', requireUser, userControllers.getMyProfileController)
 router.get('/getMyInfo', requireUser, userControllers.getMyInfo)
-router.put('/updateProfile', requireUser, userControllers.updateProfileController)
+router.put('/update', requireUser, userControllers.updateProfileController)
 
 module.exports = router

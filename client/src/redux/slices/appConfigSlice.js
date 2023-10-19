@@ -4,9 +4,9 @@ export const getMyInfo = createAsyncThunk('users/myprofileInfo', async (body, th
 
     try {
         thunkAPI.dispatch(setLoading(true))
-        const response = await axiosClient('/user/getMyInfo')
+        const response = await axiosClient.get('/user/getMyInfo')
+        console.log(response, "getMyInfo");
         return response.result.currUser
-        // console.log(response);
     } catch (error) {
         return Promise.reject(error)
     }
@@ -15,13 +15,17 @@ export const getMyInfo = createAsyncThunk('users/myprofileInfo', async (body, th
     }
 })
 
-export const updateProfileThunk = createAsyncThunk('user/updateProfile', async (body, thunkAPI) => {
-    thunkAPI.dispatch(setLoading(true))
-    try {
-        const user = await axiosClient.put('/user/updateProfile', body)
-        console.log(user, "thunkUser");
-    } catch (error) {
+export const updateProfileThunk = createAsyncThunk('user/', async (body, thunkAPI) => {
 
+    try {
+        // console.log(body);
+        thunkAPI.dispatch(setLoading(true))
+        const response = await axiosClient.put("/user/update", body)
+        console.log(response);
+        return response.result
+    } catch (error) {
+        console.log(error);
+        return Promise.reject(error)
     }
     finally {
         thunkAPI.dispatch(setLoading(false))
@@ -41,7 +45,9 @@ const appConfigSlice = createSlice({
     },
     extraReducers: (builder) => {
 
-        builder.addCase(getMyInfo.fulfilled, (state, action) => { state.myProfile = action.payload })
+        builder
+            .addCase(getMyInfo.fulfilled, (state, action) => { state.myProfile = action.payload })
+            .addCase(updateProfileThunk.fulfilled, (state, action) => { state.myProfile = action.payload.user })
     }
 })
 export const { setLoading } = appConfigSlice.actions

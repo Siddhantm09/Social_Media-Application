@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const userSchema = mongoose.Schema({
     name: {
         type: String,
-        required: true,
+        required: true
     },
 
     email: {
@@ -16,6 +16,9 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true,
         select: false      //will not send password when using (findbyId etc )
+    },
+    bio: {
+        type: String
     },
     avatar: {
         publicId: String,
@@ -33,5 +36,7 @@ const userSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'post',
     }],
+}, {
+    timestamps: true
 });
 module.exports = mongoose.model("user", userSchema);

@@ -22,3 +22,10 @@ continue from -> When access token is expired point 5
 1 Now response.data.status will not be 'ok' resulting the control going to else block, where access token will be removed from local storage
 2 redirect to login page where, The '\_self' parameter specifies that it should replace the current page in the browser's history. This means that the user won't be able to navigate back to the previous page using the browser's back button.
 3 return Promise.reject(error): This line rejects a Promise with the error. This is typically done in asynchronous code to indicate that an error has occurred. 4. Also after new login old cookie will be replaced by new cookie
+
+## thunk getMyprofile
+
+1 dispatch getMyprofile action from home page
+2 call getMyprofile from appConfigSlice
+3 store it in myProfile using extra reducer
+4 access wherever you want using useSelector

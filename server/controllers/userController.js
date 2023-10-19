@@ -1,6 +1,7 @@
 const { success, error } = require("../utils/responseWrapper");
 const Post = require("../models/Post");
 const User = require("../models/User");
+const cloudinary = require('cloudinary');
 
 const followAndUnfollowUserController = async (req, res) => {
     try {
@@ -287,6 +288,7 @@ const getMyInfo = async (req, res) => {
     try {
         const currUserId = req._id;
         const currUser = await User.findById(currUserId).populate('posts');
+
         if (currUser) {
             return res.send(success(200, { currUser }));
         }
@@ -299,8 +301,35 @@ const getMyInfo = async (req, res) => {
 const updateProfileController = async (req, res) => {
     try {
         const { name, bio, userImg } = req.body;
+
         const user = await User.findById(req._id)
-        console.log(user, "updateController");
+
+        if (name) {
+            user.name = name;
+
+        }
+        if (bio) {
+            user.bio = bio;
+
+        }
+        if (userImg) {
+
+            const cloudImg = await cloudinary.v2.uploader.upload(userImg, {
+                folder: 'photos'
+            })
+
+
+            user.avatar = {
+                publicId: cloudImg.public_id,
+                url: cloudImg.secure_url,
+
+            }
+
+        }
+
+        await user.save()
+
+        return res.send(success(200, { user }));
     } catch (e) {
         return res.send(error(500, e.message));
     }
@@ -313,6 +342,5 @@ module.exports = {
     deleteMyProfileController,
     getOtherUsersPostsController,
     getMyProfileController,
-    getMyInfo
-    , updateProfileController
+    getMyInfo, updateProfileController
 }

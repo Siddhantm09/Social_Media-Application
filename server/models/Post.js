@@ -20,5 +20,7 @@ const postSchema = mongoose.Schema({
         publicId: String,
         url: String,
     },
+}, {
+    timestamps: true
 });
 module.exports = mongoose.model('post', postSchema) 

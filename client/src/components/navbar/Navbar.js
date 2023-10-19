@@ -20,7 +20,7 @@ const Navbar = () => {
                 <h2 className='social-banner hover-link' onClick={() => navigate('/')} > Social Media</h2>
                 <div className='right-side'>
                     <div className='profile hover-link' onClick={() => navigate(`/profile/${myProfile._id}`)}>
-                        <Avatar />
+                        <Avatar src={myProfile?.avatar?.url} />
                         {/* //add detail */}
                     </div>
                     <div className='hover-link logout' onClick={handleLogoutClicked} >

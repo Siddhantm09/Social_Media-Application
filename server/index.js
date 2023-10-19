@@ -7,20 +7,18 @@ const userRouter = require("./routers/userRouter");
 const morgan = require("morgan");
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
-// import { v2 as cloudinary } from 'cloudinary';
+const cloudinary = require('cloudinary');
 
 dotenv.config('./.env')
 
-
-
-// cloudinary.config({
-//     cloud_name: process.env.CLOUD_NAME,
-//     api_key: process.env.API_KEY,
-//     api_secret: process.env.API_SECRET_KEY
-// });
+cloudinary.v2.config({
+    cloud_name: 'du4cvqtix',
+    api_key: '116921533846731',
+    api_secret: '6YDUDOiBEjZ-KuqGxzKlnJzH-fs',
+    secure: true,
+});
 
 const app = express()
-
 
 //middlewares
 app.use(express.json());     //Parse json data so that we can use it in req obj
@@ -34,9 +32,6 @@ app.use(cors({
 app.use("/auth", authRouter);
 app.use("/posts", postsRouter)
 app.use("/user", userRouter)
-
-
-
 
 const PORT = process.env.PORT || 5001
 

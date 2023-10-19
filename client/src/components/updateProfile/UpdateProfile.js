@@ -1,40 +1,46 @@
 import React, { useEffect, useState } from 'react'
 import './UpdateProfile.scss'
+import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+
 import { updateProfileThunk } from '../../redux/slices/appConfigSlice'
 
 const UpdateProfile = () => {
 
-    const dispatch = useNavigate()
-    const [name, setName] = useState()
-    const [bio, setBio] = useState()
+
+    const dispatch = useDispatch()
+    const [name, setName] = useState('')
+    const [bio, setBio] = useState('')
     const [userImg, setuserImg] = useState()
 
 
     const myProfile = useSelector((state) => state.appConfigSlice.myProfile)
 
+
     useEffect(() => {
-        setName(myProfile?.name)
-        setBio(myProfile?.bio)
-        setuserImg(myProfile?.avatar.url)
+        setName(myProfile?.name || '')
+        setBio(myProfile?.bio || '')
+        setuserImg(myProfile?.avatar?.url || '')
     }, [myProfile])
 
     const handleImageChange = (e) => {
-        e.preventDefault()
+
         const file = e.target.files[0]
-        console.log(file);
+
         const fileReader = new FileReader()
         fileReader.readAsDataURL(file);
         fileReader.onload = () => {
-            if (fileReader.readyState === FileReader.DONE) {
+            if (fileReader.readyState === fileReader.DONE) {
                 setuserImg(fileReader.result)
+
             }
         }
     }
 
     const handleSubmit = (e) => {
+
         e.preventDefault()
+
         dispatch(updateProfileThunk({ name, bio, userImg }))
 
     }
