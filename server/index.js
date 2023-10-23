@@ -21,7 +21,7 @@ cloudinary.v2.config({
 const app = express()
 
 //middlewares
-app.use(express.json());     //Parse json data so that we can use it in req obj
+app.use(express.json({ limit: '10mb' }));     //Parse json data so that we can use it in req obj
 app.use(morgan('common'))   //Shows info of API you hit
 app.use(cookieParser());   //Parse cookie data so that we can use it in req obj
 app.use(cors({

@@ -32,6 +32,7 @@ const UpdateProfile = () => {
         fileReader.onload = () => {
             if (fileReader.readyState === fileReader.DONE) {
                 setuserImg(fileReader.result)
+                console.log(fileReader.result);
 
             }
         }

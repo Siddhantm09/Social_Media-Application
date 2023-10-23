@@ -335,12 +335,17 @@ const updateProfileController = async (req, res) => {
     }
 
 }
+
+const getOtherUserProfile = async (req, res) => { }
+
 module.exports = {
     followAndUnfollowUserController,
     seeAllPostsControllers,
     getMyPostsController,
-    deleteMyProfileController,
     getOtherUsersPostsController,
     getMyProfileController,
-    getMyInfo, updateProfileController
+    deleteMyProfileController,
+    getMyInfo,
+    updateProfileController,
+    getOtherUserProfile
 }

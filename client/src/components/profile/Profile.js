@@ -3,12 +3,14 @@ import './Profile.scss'
 import Post from "../post/Post";
 import img from './../../assets/woman.png'
 import { useNavigate } from 'react-router-dom'
+import CreatePost from "../createPost/CreatePost";
 const Profile = () => {
     const navigate = useNavigate()
     return (
         <div className="Profile">
             <div className="container">
                 <div className="left-part">
+                    <CreatePost />
                     <Post />
                     <Post />
                     <Post />
