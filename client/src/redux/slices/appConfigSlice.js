@@ -5,7 +5,7 @@ export const getMyInfo = createAsyncThunk('users/myprofileInfo', async (body, th
     try {
         thunkAPI.dispatch(setLoading(true))
         const response = await axiosClient.get('/user/getMyInfo')
-        console.log(response, "getMyInfo");
+        // console.log(response, "getMyInfo");
         return response.result.currUser
     } catch (error) {
         return Promise.reject(error)
@@ -16,9 +16,8 @@ export const getMyInfo = createAsyncThunk('users/myprofileInfo', async (body, th
 })
 
 export const updateProfileThunk = createAsyncThunk('user/', async (body, thunkAPI) => {
-
     try {
-        // console.log(body);
+
         thunkAPI.dispatch(setLoading(true))
         const response = await axiosClient.put("/user/update", body)
         console.log(response);

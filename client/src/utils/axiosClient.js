@@ -29,7 +29,7 @@ axiosClient.interceptors.response.use(
 
         //if all ok then return data
         if (data.status === 'ok') {
-            // console.log('response interceptor', data);
+
             return data;
         }
 

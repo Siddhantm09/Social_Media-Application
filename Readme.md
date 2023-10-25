@@ -29,3 +29,18 @@ continue from -> When access token is expired point 5
 2 call getMyprofile from appConfigSlice
 3 store it in myProfile using extra reducer
 4 access wherever you want using useSelector
+
+## Redux Toolkit working
+
+1 Dispatch data from client to thunk
+2 Thunk gets/updates/posts data to backend and returns the response(fulfills the api call)
+3 The returned response is then set to the initial state of createSlice
+4 The fetched data is returned to the client using UseSelector
+
+## getOtherUserProfile
+
+1. Api call from profile page , using useParams which destructures userId(Ref->App.js)
+2. dispatch the userId and and recieve in getUserProfile thunk is form of body(Thunk body)
+3. make an api call from thunk process the data and send response to think and update the data in userProfile obj defined in initialState of slice
+
+## Some time otherUserProfile/otherUserPosts can be the logged in user profile

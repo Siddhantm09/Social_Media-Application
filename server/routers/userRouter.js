@@ -11,6 +11,6 @@ router.get('/userposts', requireUser, userControllers.getOtherUsersPostsControll
 router.get('/myprofile', requireUser, userControllers.getMyProfileController)
 router.get('/getMyInfo', requireUser, userControllers.getMyInfo)
 router.put('/update', requireUser, userControllers.updateProfileController)
-router.get('/userprofile', requireUser, userControllers.getOtherUserProfile)
+router.post('/getUserprofile', requireUser, userControllers.getUserProfile)
 
 module.exports = router
