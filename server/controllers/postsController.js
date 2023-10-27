@@ -48,7 +48,9 @@ const createPostController = async (req, res) => {
 const likeAndUnlikePostController = async (req, res) => {
 
     try {
-        const { postId } = req.body;
+
+        const postId = req.body.postId;
+        console.log(postId);
         const currUserId = req._id
 
         const post = await Post.findById(postId);

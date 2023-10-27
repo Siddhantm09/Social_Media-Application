@@ -39,8 +39,10 @@ continue from -> When access token is expired point 5
 
 ## getOtherUserProfile
 
-1. Api call from profile page , using useParams which destructures userId(Ref->App.js)
+1. Api call from profile page ,post and create post componets using useParams which destructures userId(Ref->App.js)
 2. dispatch the userId and and recieve in getUserProfile thunk is form of body(Thunk body)
-3. make an api call from thunk process the data and send response to think and update the data in userProfile obj defined in initialState of slice
+3. make an api call from thunk process the data and send response to think and update the data in userProfile obj defined in initialState of slice where the user.posts data is mapped into another response i.e mapPostResponse where we get each post and logged userId as parameters and after mapping the user data and each mapped post data is returned and updated to user profile inital state
 
 ## Some time otherUserProfile/otherUserPosts can be the logged in user profile
+
+## getOtherUserProfile is dispatched in multiple components to update the latest data in user profile and then display on the UI

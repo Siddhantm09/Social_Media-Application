@@ -16,9 +16,8 @@ const Profile = () => {
     //console.log(myProfile._id, userProfile._id, params);
 
     useEffect(() => {
-        // if (myProfile?._id === params.userId) {
-        //     setIsMyProfile(true)
-        // }
+
+
         setIsMyProfile(myProfile?._id === params.userId)
 
         dispatch(
@@ -26,14 +25,14 @@ const Profile = () => {
                 userId: params.userId,//url id we are sending to BE
             })
         );
-    }, [myProfile]);
+    }, []);
     return (
         <div className="Profile">
             <div className="container">
                 <div className="left-part">
                     <CreatePost />
                     {
-                        userProfile?.posts?.map((post) => {
+                        userProfile?.allposts?.map((post) => {
                             return <div key={post._id}>
                                 <Post value={post} />
                             </div>
@@ -51,7 +50,7 @@ const Profile = () => {
                             <h4>{userProfile?.followers?.length} Followers</h4>
                             <h4>{userProfile?.followings?.length} Followings</h4>
                         </div>
-                        {console.log(isMyProfile)}
+
                         {!isMyProfile && <button className="follow-btn btn-primary">Follow</button>}
                         {
                             isMyProfile && <button
