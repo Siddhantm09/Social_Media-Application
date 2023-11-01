@@ -62,16 +62,13 @@ const likeAndUnlikePostController = async (req, res) => {
         if (post.likes.includes(currUserId)) {
             const index = post.likes.indexOf(currUserId)
             post.likes.splice(index, 1);
-
-            await post.save();
-            return res.send(success(200, "Post Unliked"))
         }
         else {
             post.likes.push(currUserId)
-            await post.save()
-            return res.send(success(200, "Post liked"))
-        }
 
+        }
+        await post.save();
+        return res.send(success(200, post))
     } catch (e) {
         return res.send(error(500, e.message))
     }

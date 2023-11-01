@@ -17,7 +17,6 @@ const Profile = () => {
 
     useEffect(() => {
 
-
         setIsMyProfile(myProfile?._id === params.userId)
 
         dispatch(
@@ -25,7 +24,7 @@ const Profile = () => {
                 userId: params.userId,//url id we are sending to BE
             })
         );
-    }, []);
+    }, [myProfile]);
     return (
         <div className="Profile">
             <div className="container">

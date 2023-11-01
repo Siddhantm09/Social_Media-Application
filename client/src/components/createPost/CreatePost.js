@@ -2,12 +2,14 @@ import React, { useState } from 'react'
 import Avatar from '../avatar/Avatar'
 import './CreatePost.scss'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { axiosClient } from '../../utils/axiosClient'
 import { setLoading } from '../../redux/slices/appConfigSlice'
 import { getUserProfile } from '../../redux/slices/postSlice'
 import { useParams } from "react-router-dom";
 const CreatePost = () => {
+    const myProfile = useSelector((state) => state.appConfigSlice.myProfile)
+    console.log(myProfile?._id);
     const params = useParams();
 
     const dispatch = useDispatch();
@@ -33,7 +35,7 @@ const CreatePost = () => {
             console.log(result);
             //to update the user profile with new created post data
             dispatch(getUserProfile({
-                userId: params.userId,//url id we are sending to BE
+                userId: myProfile?._id, //logged in user id we are sending to BE 
             }))
         } catch (error) {
             console.log(error);

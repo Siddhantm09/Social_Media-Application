@@ -1,13 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Feed.scss'
 import Post from '../post/Post'
 import Follower from '../follower/Follower'
+import { axiosClient } from '../../utils/axiosClient'
 
 const Feed = () => {
+    // const [allPostss, setAllposts] = useState([])
+    useEffect(() => {
+        getAllposts()
+    }, [])
+    const getAllposts = async () => {
+        const allPosts = await axiosClient.get("/user/seePosts")
+        // setAllposts(allPosts?.result)
+        console.log(allPosts?.result);
+    }
     return (
         <div className='Feed'>
             <div className='container'>
                 <div className='left-part'>
+                    {/* {allPostss?.map(
+                    )} */}
                     <Post />
                     <Post />
                     <Post />

@@ -35,7 +35,7 @@ axiosClient.interceptors.response.use(
 
 
         const originalRequest = response.config //to bring url
-        const error = data.status
+        const error = data.message
         const statusCode = data.statusCode
         // console.log(originalRequest, error, statusCode);
         // console.log(originalRequest._retry);

@@ -5,7 +5,7 @@ export const getMyInfo = createAsyncThunk('users/myprofileInfo', async (body, th
     try {
         thunkAPI.dispatch(setLoading(true))
         const response = await axiosClient.get('/user/getMyInfo')
-        //console.log(response, "getMyInfo");
+        console.log(response, "getMyInfo");
         return response.result.currUser
     } catch (error) {
         return Promise.reject(error)

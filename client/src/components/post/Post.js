@@ -5,20 +5,17 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { setLoading } from '../../redux/slices/appConfigSlice'
 import { axiosClient } from "../../utils/axiosClient";
-import { getUserProfile } from "../../redux/slices/postSlice";
-import { useParams } from "react-router-dom";
+
 const Post = (post) => {
-    const params = useParams();
+
     const dispatch = useDispatch();
     const isLiked = async (postId) => {
         try {
             dispatch(setLoading(true))
 
             await axiosClient.post('/posts/like', { postId })
-            //to update the user profile with liked post data
-            dispatch(getUserProfile({
-                userId: params.userId,//url id we are sending to BE
-            }))
+
+
         } catch (error) {
             console.log(error);
         }
@@ -27,7 +24,7 @@ const Post = (post) => {
         }
 
     }
-    // console.log(post);
+
     return (
         <div className="Post">
             <div className="heading">
