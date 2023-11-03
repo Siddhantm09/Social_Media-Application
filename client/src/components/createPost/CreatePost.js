@@ -36,7 +36,7 @@ const CreatePost = () => {
             console.log(result);
             //to update the user profile with new created post data
             dispatch(getUserProfile({
-                userId: myProfile?._id, //logged in user id we are sending to BE 
+                userId: myProfile?._id, //logged in user id we are sending to BE,redirect to my profile 
             }))
         } catch (error) {
             console.log(error);

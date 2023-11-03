@@ -20,7 +20,7 @@ export const getFeedData = createAsyncThunk('users/getUserFeed', async (body, th
 })
 
 const feedSlice = createSlice({
-    name: 'postSlice',
+    name: 'feedSlice',
     initialState: { feedData: {} },
 
     extraReducers: (builder) => {
