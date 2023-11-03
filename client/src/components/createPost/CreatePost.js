@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import Avatar from '../avatar/Avatar'
 import './CreatePost.scss'
-
 import { useDispatch, useSelector } from 'react-redux'
 import { axiosClient } from '../../utils/axiosClient'
 import { setLoading } from '../../redux/slices/appConfigSlice'
 import { getUserProfile } from '../../redux/slices/postSlice'
 import { useParams } from "react-router-dom";
+
+
 const CreatePost = () => {
     const myProfile = useSelector((state) => state.appConfigSlice.myProfile)
-    console.log(myProfile?._id);
+    //console.log(myProfile?._id);
     const params = useParams();
 
     const dispatch = useDispatch();

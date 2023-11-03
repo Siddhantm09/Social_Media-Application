@@ -48,3 +48,5 @@ continue from -> When access token is expired point 5
 ## getUserProfile Thunk
 
 getOtherUserProfile is dispatched in multiple components to update the latest data in user profile and then display on the UI,it is good only when the we have open profile page of any user as it can take that user's params id and can update the profile page by sending request to getUserProfile thunk, but is case of feed page dispatching getUserProfile thunk wont work because there is no id in url so the functionalities like 'Like and dislike' wont work , so in feed page we have to dispatch a new thunk which takes the post id and updates the post data buy calling API by thunk
+
+## dispatch(likeAndUnlike({ postId: post.value.\_id }))

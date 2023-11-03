@@ -45,10 +45,10 @@ const followAndUnfollowUserController = async (req, res) => {
     }
 };
 
-const seeAllPostsControllers = async (req, res) => {
+const getallFeedControllers = async (req, res) => {
     try {
         const currUserId = req._id; //jisko post dekhna hai uska id
-        console.log('Hekki');
+
         const currUser = await User.findById(currUserId); //jisko post dekhna hai uska id
 
         //posts ke owner jo mere followings me hai
@@ -360,7 +360,7 @@ const getUserProfile = async (req, res) => {
 
 module.exports = {
     followAndUnfollowUserController,
-    seeAllPostsControllers,
+    getallFeedControllers,
     getMyPostsController,
     getOtherUsersPostsController,
     getMyProfileController,

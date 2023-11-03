@@ -56,7 +56,7 @@ const likeAndUnlikePostController = async (req, res) => {
         const post = await Post.findById(postId);
 
         if (!post) {
-            return res.send(error(400, 'No Posts found'))
+            return res.send(error(404, 'No Posts found'))
         }
 
         if (post.likes.includes(currUserId)) {
@@ -65,7 +65,6 @@ const likeAndUnlikePostController = async (req, res) => {
         }
         else {
             post.likes.push(currUserId)
-
         }
         await post.save();
         return res.send(success(200, post))

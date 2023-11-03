@@ -85,7 +85,7 @@ axiosClient.interceptors.response.use(
 
         return Promise.reject(error) //returns error in the error block from where original request was was made
     },
-    (error) => {
-
+    async (error) => {
+        return Promise.reject(error)
     }
 )

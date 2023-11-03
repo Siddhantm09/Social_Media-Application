@@ -1,0 +1,45 @@
+.CreatePost {
+  display: flex;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 20px;
+  gap: 20px;
+  margin-top: 20px;
+}
+.CreatePost .cp-right-part {
+  flex-grow: 1;
+}
+.CreatePost .cp-right-part .captionInput {
+  width: 100%;
+  padding: 8px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+}
+.CreatePost .cp-right-part .img-container {
+  margin-top: 20px;
+}
+.CreatePost .cp-right-part .img-container .posted-img {
+  width: 100%;
+  aspect-ratio: 16/9;
+}
+.CreatePost .cp-right-part .LabelImg {
+  display: inline-block;
+  background-color: var(--accent-color);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.CreatePost .cp-right-part .userImage {
+  display: none;
+}
+.CreatePost .cp-right-part .bottom-part {
+  display: flex;
+  margin-top: 20px;
+  justify-content: space-between;
+  align-items: center;
+}/*# sourceMappingURL=CreatePost.css.map */

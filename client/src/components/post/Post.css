@@ -1,0 +1,38 @@
+.Post {
+  border: 1px solid var(--border-color);
+  margin-top: 20px;
+  border-radius: 4px;
+}
+.Post .heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 60px;
+  padding: 20px;
+}
+.Post .content {
+  height: 400px;
+}
+.Post .content img {
+  width: 100%;
+  height: 100%;
+}
+.Post .footer {
+  padding: 20px;
+}
+.Post .footer .like {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.Post .footer .like .icon {
+  font-size: 1.5rem;
+}
+.Post .footer .caption {
+  margin-top: 10px;
+}
+.Post .footer .time-ago {
+  margin-top: 10px;
+  color: #aaa;
+}/*# sourceMappingURL=Post.css.map */

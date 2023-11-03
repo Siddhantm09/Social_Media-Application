@@ -3,17 +3,13 @@ import './Feed.scss'
 import Post from '../post/Post'
 import Follower from '../follower/Follower'
 import { axiosClient } from '../../utils/axiosClient'
-
+import { useDispatch } from 'react-redux'
 const Feed = () => {
-    // const [allPostss, setAllposts] = useState([])
+    const dispatch = useDispatch()
     useEffect(() => {
-        getAllposts()
-    }, [])
-    const getAllposts = async () => {
-        const allPosts = await axiosClient.get("/user/seePosts")
-        // setAllposts(allPosts?.result)
-        console.log(allPosts?.result);
-    }
+
+    }, [dispatch])
+
     return (
         <div className='Feed'>
             <div className='container'>

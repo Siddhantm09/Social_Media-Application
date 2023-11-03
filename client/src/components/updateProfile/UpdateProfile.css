@@ -1,0 +1,53 @@
+.UpdateProfile {
+  padding-top: 20px;
+}
+.UpdateProfile .container {
+  display: flex;
+  text-align: center;
+}
+.UpdateProfile .container .left-part {
+  flex: 1;
+  text-align: center;
+}
+.UpdateProfile .container .left-part .input-user-Img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.UpdateProfile .container .left-part .input-user-Img .LabelImg {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px dashed var(--accent-color);
+}
+.UpdateProfile .container .left-part .input-user-Img .LabelImg img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.UpdateProfile .container .left-part .input-user-Img .userImage {
+  display: none;
+}
+.UpdateProfile .container .right-part {
+  flex: 3;
+}
+.UpdateProfile .container .right-part form {
+  border: 1px solid var(--border-color);
+  padding: 16px 32px;
+  align-items: center;
+}
+.UpdateProfile .container .right-part form input {
+  padding: 8px 16px;
+  width: 100%;
+  margin-top: 16px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+}
+.UpdateProfile .container .right-part form .btn-primary {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.UpdateProfile .container .delete-profile-btn {
+  margin-top: 16px;
+  background-color: red;
+}/*# sourceMappingURL=UpdateProfile.css.map */

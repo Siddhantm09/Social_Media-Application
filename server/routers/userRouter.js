@@ -4,7 +4,7 @@ const userControllers = require('../controllers/userController');
 
 
 router.post('/follow', requireUser, userControllers.followAndUnfollowUserController)
-router.get('/seePosts', requireUser, userControllers.seeAllPostsControllers)
+router.get('/getFeedData', requireUser, userControllers.getallFeedControllers)
 router.delete('/', requireUser, userControllers.deleteMyProfileController)
 router.get('/myposts', requireUser, userControllers.getMyPostsController)
 router.get('/userposts', requireUser, userControllers.getOtherUsersPostsController)

@@ -1,0 +1,43 @@
+.login {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login .login-box {
+  padding: 40px;
+  min-width: 400px;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+.login .heading {
+  text-align: center;
+}
+.login label,
+.login input {
+  display: block;
+  width: 100%;
+  margin-block: 8px;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+.login input {
+  font-weight: bold;
+  border: 1px solid black;
+}
+.login label {
+  font-weight: bold;
+}
+.login .submit {
+  background-color: lightseagreen;
+  border: none;
+  color: aliceblue;
+  margin-top: 16px;
+  font-weight: bold;
+}
+.login .submit:hover {
+  background-color: aqua;
+}
+.login .link {
+  text-align: center;
+}/*# sourceMappingURL=login.css.map */

@@ -1,0 +1,43 @@
+.signup {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.signup .signup-box {
+  padding: 40px;
+  min-width: 400px;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+.signup .heading {
+  text-align: center;
+}
+.signup label,
+.signup input {
+  display: block;
+  width: 100%;
+  margin-block: 8px;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+.signup input {
+  font-weight: bold;
+  border: 1px solid black;
+}
+.signup label {
+  font-weight: bold;
+}
+.signup .submit {
+  background-color: lightseagreen;
+  border: none;
+  color: aliceblue;
+  margin-top: 16px;
+  font-weight: bold;
+}
+.signup .submit:hover {
+  background-color: aqua;
+}
+.signup .link {
+  text-align: center;
+}/*# sourceMappingURL=signup.css.map */
