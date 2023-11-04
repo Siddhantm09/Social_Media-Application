@@ -49,20 +49,28 @@ const getallFeedControllers = async (req, res) => {
     try {
         const currUserId = req._id; //jisko post dekhna hai uska id
 
-        const currUser = await User.findById(currUserId); //jisko post dekhna hai uska id
+        const currUser = await User.findById(currUserId).populate('followings').populate('followers'); //jisko post dekhna hai uska id
 
         //posts ke owner jo mere followings me hai
-        const posts = await Post.find({
+        const followingsposts = await Post.find({
             owner: {
                 $in: currUser.followings,
             },
-        });
+        }).populate('owner');
 
-        if (!posts) {
+        if (!followingsposts) {
             return res.send(error(404, "No Posts exists"));
-        } else {
-            return res.send(success(200, posts));
         }
+        const followingsIds = currUser.followings.map((item) => item._id)//ids of followings
+        const suggestions = await User.find({
+            _id: {
+                $nin: followingsIds  //ids not in followingsIds
+            }
+        })
+        const MappedFollowingposts = followingsposts.map((item) => mapPostResponse(item, req._id)).reverse()
+
+        return res.send(success(200, { ...currUser._doc, MappedFollowingposts, suggestions }));
+
     } catch (e) {
         return res.send(error(500, e.message));
     }
