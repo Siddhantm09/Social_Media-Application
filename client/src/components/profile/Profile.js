@@ -33,6 +33,7 @@ const Profile = () => {
                     {
                         userProfile?.allposts?.map((post) => {
                             return <div key={post._id}>
+
                                 <Post value={post} />
                             </div>
 

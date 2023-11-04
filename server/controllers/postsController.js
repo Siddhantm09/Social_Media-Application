@@ -2,6 +2,7 @@ const { success, error } = require("../utils/responseWrapper");
 const Post = require("../models/Post");
 const User = require("../models/User");
 const cloudinary = require('cloudinary');
+const mapPostResponse = require('../utils/Utils')
 const getAllPostsController = (req, res) => {
     // console.log(req._id);
 
@@ -50,10 +51,10 @@ const likeAndUnlikePostController = async (req, res) => {
     try {
 
         const postId = req.body.postId;
-        console.log(postId);
+
         const currUserId = req._id
 
-        const post = await Post.findById(postId);
+        const post = await Post.findById(postId).populate('owner');
 
         if (!post) {
             return res.send(error(404, 'No Posts found'))
@@ -67,7 +68,9 @@ const likeAndUnlikePostController = async (req, res) => {
             post.likes.push(currUserId)
         }
         await post.save();
-        return res.send(success(200, post))
+
+        return res.send(success(200, { post: mapPostResponse(post, req._id) }))
+        //sending liked or unliked post by mapping with mapPostResponse coz in userProfile.allposts data is mapped in following manner
     } catch (e) {
         return res.send(error(500, e.message))
     }

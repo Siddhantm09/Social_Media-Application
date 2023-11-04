@@ -8,40 +8,52 @@ export const getUserProfile = createAsyncThunk('users/getUserProfile', async (bo
         thunkAPI.dispatch(setLoading(true))
 
         const response = await axiosClient.post('/user/getUserprofile', body)
-        // console.log(response, "getUserprofile");
+        console.log(response, "getUserprofile");
 
         return response.result
     } catch (error) {
         return Promise.reject(error)
     }
     finally {
+        console.log('getUserProfile Finally');
         thunkAPI.dispatch(setLoading(false))
     }
 })
 
-// export const likeAndUnlike = createAsyncThunk('posts/likeAndUnlike', async (body, thunkAPI) => {
-//     try {
-//         thunkAPI.dispatch(setLoading(true))
-//         console.log(body);
-//         const response = await axiosClient.post('/posts/like', body)
-//         // console.log(response, "likeandUnlike");
+export const likeAndUnlike = createAsyncThunk('posts/likeAndUnlike', async (body, thunkAPI) => {
+    try {
+        thunkAPI.dispatch(setLoading(true))
 
-//         return response.result
-//     } catch (error) {
-//         return Promise.reject(error)
-//     }
-//     finally {
-//         thunkAPI.dispatch(setLoading(false))
-//     }
+        const response = await axiosClient.post('/posts/like', body)
+        console.log(response, "likeandUnlike");
 
-// })
+        return response.result
+    } catch (error) {
+        return Promise.reject(error)
+    }
+    finally {
+
+        thunkAPI.dispatch(setLoading(false))
+    }
+
+})
 const postSlice = createSlice({
     name: 'postSlice',
     initialState: { userProfile: {} },
 
     extraReducers: (builder) => {
-        builder.addCase(getUserProfile.fulfilled, (state, action) => { state.userProfile = action.payload })
-        // .addCase(likeAndUnlike.fulfilled, (state, action) => { })
+
+        builder.addCase(getUserProfile.fulfilled, (state, action) => { state.userProfile = action.payload; console.log("GUP ExtaReducer"); })
+            .addCase(likeAndUnlike.fulfilled, (state, action) => {
+
+                const post = action.payload
+                //check if likedorUnliked post is present in the userProfile.allposts
+                const ifPresentidx = state.userProfile?.allposts?.findIndex((item) => item._id === post.post._id);
+                if (ifPresentidx !== -1) {
+                    state.userProfile.allposts[ifPresentidx] = post.post//likedorUnliked post replaced with current post
+                }
+
+            })
 
     }
 })
