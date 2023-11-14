@@ -5,19 +5,18 @@ const cloudinary = require('cloudinary');
 const mapPostResponse = require('../utils/Utils')
 const followAndUnfollowUserController = async (req, res) => {
     try {
+
         const { userToFollowId } = req.body;
         const currUserId = req._id;
 
         const currUser = await User.findById(currUserId);
         const userToFollow = await User.findById(userToFollowId);
 
-        if (currUserId === userToFollowId) {
-            res.send(error(409, "Cannot follow yourself"));
-        }
 
         if (!userToFollow) {
             res.send(error(404, "User to follow not found"));
         }
+
 
         //already follows
         if (currUser.followings.includes(userToFollowId)) {
@@ -29,17 +28,20 @@ const followAndUnfollowUserController = async (req, res) => {
             const followersindex = userToFollow.followers.indexOf(currUserId);
             userToFollow.followers.splice(followersindex, 1);
 
-            await currUser.save();
-            userToFollow.save();
-            return res.send(success(200, "User unfollowed"));
+
         } else {
             //not followed
             currUser.followings.push(userToFollowId);
             userToFollow.followers.push(currUserId);
-            await currUser.save();
-            await userToFollow.save();
-            return res.send(success(200, "User followed"));
+
         }
+
+        // if (currUserId === userToFollowId) {
+        //     currUser.followings.findById()
+        // }
+        await currUser.save();
+        await userToFollow.save();
+        return res.send(success(200, { user: userToFollow }));
     } catch (e) {
         return res.send(error(500, e.message));
     }
@@ -62,6 +64,7 @@ const getallFeedControllers = async (req, res) => {
             return res.send(error(404, "No Posts exists"));
         }
         const followingsIds = currUser.followings.map((item) => item._id)//ids of followings
+        followingsIds.push(req._id)
         const suggestions = await User.find({
             _id: {
                 $nin: followingsIds  //ids not in followingsIds

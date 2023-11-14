@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import './Feed.scss'
 import Post from '../post/Post'
 import Follower from '../follower/Follower'
 import { useDispatch, useSelector } from 'react-redux'
 import { getFeedData } from '../../redux/slices/feedSlice'
-const Feed = () => {
-    const allFeedData = useSelector((state) => state.feedSlice.feedData)
 
+const Feed = () => {
     const dispatch = useDispatch()
+
     useEffect(() => {
         dispatch(
             getFeedData()
         )
     }, [dispatch])
-
+    const allFeedData = useSelector((state) => state.feedSlice.feedData)
     return (
         <div className='Feed'>
             <div className='container'>
@@ -23,15 +23,17 @@ const Feed = () => {
                             <Post value={post} />
                         </div>
                     }
-
                     )}
 
 
                 </div>
                 <div className='right-part'>
                     <div className='following'>
+
                         <h3 className='title'>Your are following</h3>
-                        {allFeedData?.followers?.map((follower) => {
+                        {/* {console.log(allFeedData?.followings, 'Feed Page')} */}
+                        {allFeedData?.followings?.map((follower) => {
+
                             return <div key={follower._id}>
                                 <Follower value={follower} />
                             </div>

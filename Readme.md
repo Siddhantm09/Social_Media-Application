@@ -54,3 +54,7 @@ getOtherUserProfile is dispatched in multiple components to update the latest da
 ## likeAndUnlike functionality post in feed page
 
 when we like or unlike a post on the feed page it goes to postSlice in likeAndUnlike Thunk after then the 2nd extraReducer is executed, so currUser id will be added or deleted from the post liked array list and if the post exist in user profile ,the post will be updated with liked or unliked post.The ifPresentidx becomes undefined and nothing gets added to user profile state.
+
+## follow and unfollow functionality
+
+dispatch from client -> go in thunk -> req sent -> controller does the work , removes or adds the user in followings and followers arrays ->returns the user which was followed or unfollowed to thunk -> update the feedData with returned user and then feed page will be updated

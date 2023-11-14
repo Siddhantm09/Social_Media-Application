@@ -9,7 +9,6 @@ import { likeAndUnlike } from "../../redux/slices/postSlice";
 
 const Post = (post) => {
 
-    const myProfile = useSelector((state) => state.appConfigSlice.myProfile)
     const dispatch = useDispatch();
 
     const handlePostLiked = async () => {
