@@ -15,7 +15,7 @@ export const getMyInfo = createAsyncThunk('users/myprofileInfo', async (body, th
     }
 })
 
-export const updateProfileThunk = createAsyncThunk('user/', async (body, thunkAPI) => {
+export const updateProfileThunk = createAsyncThunk('user/updateProfile', async (body, thunkAPI) => {
     try {
 
         thunkAPI.dispatch(setLoading(true))

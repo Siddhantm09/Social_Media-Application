@@ -3,11 +3,12 @@ import Avatar from '../avatar/Avatar'
 import './Follower.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { followAndUnfollow } from '../../redux/slices/feedSlice'
-
+import { useNavigate } from "react-router";
 const Follower = (follower) => {
 
     const [follow, setFollow] = useState();
     const dispatch = useDispatch();
+    const navigate = useNavigate()
     const feedData = useSelector(state => state.feedSlice.feedData);
 
     function handleFollowClick() {
@@ -22,11 +23,11 @@ const Follower = (follower) => {
         else {
             setFollow(false)
         }
-
     }, [feedData])
+
     return (
         <div className='follower'>
-            <div className='user-info'>
+            <div className='user-info' onClick={() => navigate(`/profile/${follower.value._id}`)}>
                 <Avatar src={follower?.value?.avatar?.url} />
 
                 <h3 className='name'>{follower?.value?.name}</h3>

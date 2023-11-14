@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Profile.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from 'react-redux'
+import { useDispatch } from "react-redux";
 import Post from "../post/Post";
 import { useNavigate, useParams } from "react-router-dom";
 import CreatePost from "../createPost/CreatePost";
@@ -29,7 +30,7 @@ const Profile = () => {
         <div className="Profile">
             <div className="container">
                 <div className="left-part">
-                    <CreatePost />
+                    {isMyProfile && <CreatePost />}
                     {
                         userProfile?.allposts?.map((post) => {
                             return <div key={post._id}>

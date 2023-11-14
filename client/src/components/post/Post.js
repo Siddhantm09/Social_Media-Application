@@ -4,13 +4,14 @@ import "./Post.scss";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { likeAndUnlike } from "../../redux/slices/postSlice";
+import { useNavigate } from "react-router";
 // import { getUserProfile } from "../../redux/slices/postSlice";
 
 
 const Post = (post) => {
-
+    console.log();
     const dispatch = useDispatch();
-
+    const navigate = useNavigate()
     const handlePostLiked = async () => {
 
         dispatch(
@@ -22,7 +23,7 @@ const Post = (post) => {
     // console.log(post);
     return (
         <div className="Post">
-            <div className="heading">
+            <div className="heading" onClick={() => navigate(`/profile/${post.value.owner._id}`)} >
                 <Avatar />
 
                 <h4>{post?.value?.owner?.name}</h4>
