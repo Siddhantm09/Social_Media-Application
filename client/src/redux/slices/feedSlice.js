@@ -27,7 +27,7 @@ export const followAndUnfollow = createAsyncThunk('users/getFOUUser', async (bod
 
         const response = await axiosClient.post('/user/follow', body)
 
-        console.log("response of getFOUUser", response.result.user);
+        // console.log("response of getFOUUser", response.result.user);
         return response.result.user
     } catch (error) {
         return Promise.reject(error)

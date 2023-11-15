@@ -12,19 +12,18 @@ const Profile = () => {
     const params = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [following, setFollowing] = useState();
-    const [isMyProfile, setIsMyProfile] = useState(false)
-    const feedData = useSelector(state => state.feedSlice.feedData);
+    const [following, setFollowing] = useState(false);
+    const [isMyProfile, setIsMyProfile] = useState()
     const userProfile = useSelector((state) => state.postSlice.userProfile)
     const myProfile = useSelector((state) => state.appConfigSlice.myProfile)
+
     //console.log(myProfile._id, userProfile._id, params);
     const handleUserFollow = () => {
         dispatch(followAndUnfollow({ userToFollowId: params?.userId }))
     }
     useEffect(() => {
 
-        setFollowing(feedData?.followings?.find((item) => item._id === params?.userId))
-
+        setFollowing(myProfile?.followings?.find((item) => item._id === params?.userId))
 
         setIsMyProfile(myProfile?._id === params.userId)
 
@@ -59,7 +58,7 @@ const Profile = () => {
                             <h4>{userProfile?.followers?.length} Followers</h4>
                             <h4>{userProfile?.followings?.length} Followings</h4>
                         </div>
-
+                        {console.log(following, 'follow')}
                         {!isMyProfile && !following && <button onClick={handleUserFollow} className="follow-btn btn-primary">Follow</button>}
                         {following && <button onClick={handleUserFollow} className="follow-btn btn-primary">Unfollow</button>}
                         {

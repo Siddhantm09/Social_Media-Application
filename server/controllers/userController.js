@@ -298,7 +298,7 @@ const getMyProfileController = async (req, res) => {
 const getMyInfo = async (req, res) => {
     try {
         const currUserId = req._id;
-        const currUser = await User.findById(currUserId).populate('posts');
+        const currUser = await User.findById(currUserId).populate('posts').populate('followings');
 
         if (currUser) {
             return res.send(success(200, { currUser }));

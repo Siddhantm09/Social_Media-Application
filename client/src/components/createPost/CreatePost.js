@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { axiosClient } from '../../utils/axiosClient'
 import { setLoading } from '../../redux/slices/appConfigSlice'
 import { getUserProfile } from '../../redux/slices/postSlice'
-import { useParams } from "react-router-dom";
+
 
 
 const CreatePost = () => {
     const myProfile = useSelector((state) => state.appConfigSlice.myProfile)
     //console.log(myProfile?._id);
-    const params = useParams();
+
 
     const dispatch = useDispatch();
     const [postImg, setPostImg] = useState()
@@ -51,7 +51,7 @@ const CreatePost = () => {
     return (
         <div className='CreatePost'>
             <div className='cp-left-part'>
-                <Avatar />
+                <Avatar src={myProfile?.avatar?.url} />
             </div>
             <div className='cp-right-part'>
                 <input value={caption} type='text' className='captionInput' placeholder='Whats in you mind...' onChange={(e) => setCaption(e.target.value)} />

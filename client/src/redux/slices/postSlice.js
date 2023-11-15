@@ -9,7 +9,7 @@ export const getUserProfile = createAsyncThunk(
             thunkAPI.dispatch(setLoading(true));
 
             const response = await axiosClient.post("/user/getUserprofile", body);
-            console.log(response, "getUserprofile");
+            // console.log(response, "getUserprofile");
 
             return response.result;
         } catch (error) {
