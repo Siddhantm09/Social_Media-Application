@@ -15,7 +15,7 @@ const createPostController = async (req, res) => {
 
         if (!postImg || !caption) {
 
-            return res.send(error(400, 'Caption and postImg is required'));
+            return res.send(error(400, 'Caption and Post Image is required'));
         }
 
         const owner = req._id; //id which we passed in middleware
@@ -90,7 +90,7 @@ const updatepostsController = async (req, res) => {
             return res.send(error(404, 'No Posts exists'))
         }
         if (!newCaption) {
-            return res.send(error(404, 'No caption exists'))
+            return res.send(error(404, 'No Caption exists'))
         }
 
         if (post.owner.toString() !== currUserId) {

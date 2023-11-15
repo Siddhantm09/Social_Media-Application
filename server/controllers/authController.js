@@ -59,7 +59,7 @@ const loginController = async (req, res) => {
 
 
         if (!matched) {
-            res.send(error(403, 'Password incorrect'))
+            res.send(error(403, 'Password Incorrect'))
         }
 
         const accessToken = generateAccessToken({ _id: users._id });
@@ -125,7 +125,7 @@ const logoutController = (req, res) => {
         });
         //res.end()
 
-        return res.send(success(201, "user logged out successfully"));
+        return res.send(success(201, "User logged out successfully"));
 
     } catch (e) {
         return res.send(error(500, e.message))

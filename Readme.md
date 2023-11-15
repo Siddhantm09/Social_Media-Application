@@ -58,3 +58,11 @@ when we like or unlike a post on the feed page it goes to postSlice in likeAndUn
 ## follow and unfollow functionality
 
 dispatch from client -> go in thunk -> req sent -> controller does the work , removes or adds the user in followings and followers arrays ->returns the user which was followed or unfollowed to thunk -> update the feedData with returned user and then feed page will be updated
+
+## react-hot-toast
+
+install->import toast,Toaster in App.js->declare 2 variables TOST_SUCCESS = 'toast_success',TOST_FAILURE = 'toast_failure' in App.js->create toastData state in appConfigSlice->dispatch from client -> go in thunk -> set toastDat value -> useSelector in App.js->check the type of toast in switch and display toast
+
+## react-hot-toast in AxiosClient
+
+Can only dispatch actions in react components , but dispatch in necessary to use toastData so we import store in axiosClient

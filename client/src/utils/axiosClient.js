@@ -1,5 +1,10 @@
 import axios from 'axios'
 import { getItem, KEY_ACCESS_TOKEN, removeItem, setItem } from './localStorage'
+import store from '../redux/store'
+import { setToast } from '../redux/slices/appConfigSlice'
+import { TOST_FAILURE } from '../App'
+import { setLoading } from '../redux/slices/appConfigSlice'
+
 
 export const axiosClient = axios.create({
     baseURL: process.env.REACT_APP_SERVER_BASE_URL,
@@ -9,11 +14,14 @@ export const axiosClient = axios.create({
 
 //sending Authorization in Header with Bearer space accessToken (Authorization Token) for accessing any data (more detail in requireUser.js)
 axiosClient.interceptors.request.use(
+
     (request) => {
 
         const accessToken = getItem(KEY_ACCESS_TOKEN);
         request.headers['Authorization'] = `Bearer ${accessToken}`;
         //console.log('req interceptor', request.headers.Authorization);
+        store.dispatch(setLoading(true));
+
         return request;
 
     }
@@ -24,7 +32,7 @@ axiosClient.interceptors.request.use(
 axiosClient.interceptors.response.use(
 
     async (response) => {
-
+        store.dispatch(setLoading(false));
         const data = response.data;     //axios returns response obj with data in it
 
         //if all ok then return data
@@ -40,7 +48,11 @@ axiosClient.interceptors.response.use(
         // console.log(originalRequest, error, statusCode);
         // console.log(originalRequest._retry);
 
+        store.dispatch(setToast({ //handle error with toast
+            type: TOST_FAILURE,
+            message: error,
 
+        }))
 
         //check if 401 and also check if /auth/refresh is called
         //so if below condn is true we logout the user and redirect to /login
@@ -86,6 +98,11 @@ axiosClient.interceptors.response.use(
         return Promise.reject(error) //returns error in the error block from where original request was was made
     },
     async (error) => {
-        return Promise.reject(error)
+        store.dispatch(setLoading(false));
+        store.dispatch(setToast({ //handle server error with toast
+            type: TOST_FAILURE,
+            message: error.message,
+        }))
+        return Promise.reject(error)//server sends an error
     }
 )

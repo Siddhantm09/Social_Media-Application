@@ -246,7 +246,7 @@ const deleteMyProfileController = async (req, res) => {
 
         })
 
-        return res.send(success(200, 'successfull'));
+        return res.send(success(200, 'Successfull'));
     } catch (e) {
         return res.send(error(500, e.message));
     }
@@ -259,7 +259,7 @@ const getOtherUsersPostsController = async (req, res) => {
 
         if (!otheruserId) {
 
-            return res.send(error(400, 'user id is required'))
+            return res.send(error(400, 'User id is required'))
 
         }
         const currUser = await User.findById(currUserId);

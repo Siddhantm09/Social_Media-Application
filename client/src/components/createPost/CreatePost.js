@@ -3,7 +3,7 @@ import Avatar from '../avatar/Avatar'
 import './CreatePost.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { axiosClient } from '../../utils/axiosClient'
-import { setLoading } from '../../redux/slices/appConfigSlice'
+
 import { getUserProfile } from '../../redux/slices/postSlice'
 
 
@@ -31,7 +31,7 @@ const CreatePost = () => {
 
     const handleSubmit = async () => {
         try {
-            dispatch(setLoading(true))
+
             const result = await axiosClient.post('/posts/post', { postImg, caption })
             console.log(result);
             //to update the user profile with new created post data
@@ -42,7 +42,7 @@ const CreatePost = () => {
             console.log(error);
         }
         finally {
-            dispatch(setLoading(false))
+
             setCaption('')
             setPostImg('')
         }

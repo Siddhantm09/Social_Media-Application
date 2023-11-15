@@ -5,15 +5,19 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { likeAndUnlike } from "../../redux/slices/postSlice";
 import { useNavigate } from "react-router";
-// import { getUserProfile } from "../../redux/slices/postSlice";
-
+import { setToast } from "../../redux/slices/appConfigSlice";
+import { TOST_SUCCESS } from "../../App";
 
 const Post = (post) => {
     console.log();
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const handlePostLiked = async () => {
+        dispatch(setToast({
+            type: TOST_SUCCESS,
+            message: 'Liked/UnLiked',
 
+        }))
         dispatch(
             likeAndUnlike({
                 postId: post.value._id

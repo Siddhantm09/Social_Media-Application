@@ -1,11 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { axiosClient } from '../../utils/axiosClient'
-import { setLoading } from './appConfigSlice'
 import { likeAndUnlike } from './postSlice'
 
-export const getFeedData = createAsyncThunk('users/getUserFeed', async (_, thunkAPI) => {
+export const getFeedData = createAsyncThunk('users/getUserFeed', async () => {
     try {
-        thunkAPI.dispatch(setLoading(true))
         const response = await axiosClient.get('/user/getFeedData')
         // console.log(response.result, "getFeedData");
         //console.log("response of getFeedData", response.result);
@@ -13,28 +11,18 @@ export const getFeedData = createAsyncThunk('users/getUserFeed', async (_, thunk
     } catch (error) {
         return Promise.reject(error)
     }
-    finally {
-        thunkAPI.dispatch(setLoading(false))
-    }
-
 })
 
 
-export const followAndUnfollow = createAsyncThunk('users/getFOUUser', async (body, thunkAPI) => {
+export const followAndUnfollow = createAsyncThunk('users/getFOUUser', async (body) => {
     try {
-
-        thunkAPI.dispatch(setLoading(true))
-
         const response = await axiosClient.post('/user/follow', body)
-
         // console.log("response of getFOUUser", response.result.user);
         return response.result.user
     } catch (error) {
         return Promise.reject(error)
     }
-    finally {
-        thunkAPI.dispatch(setLoading(false))
-    }
+
 
 })
 

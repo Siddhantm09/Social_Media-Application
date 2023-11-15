@@ -10,10 +10,16 @@ import UpdateProfile from "./components/updateProfile/UpdateProfile";
 import LoadingBar from 'react-top-loading-bar'
 import { useSelector } from 'react-redux'
 import IfLoggedIn from "./components/IfLoggedIn";
+import toast, { Toaster } from 'react-hot-toast';
+
+export const TOST_SUCCESS = 'toast_success'
+export const TOST_FAILURE = 'toast_failure'
+
 
 function App() {
   const loadingRef = useRef(null)
   const isloading = useSelector((state) => state.appConfigSlice.isloading)
+  const toastData = useSelector((state) => state.appConfigSlice.toastData)
 
 
   useEffect(() => {
@@ -24,9 +30,27 @@ function App() {
       loadingRef.current?.complete()
     }
   }, [isloading])
+
+  useEffect(() => {
+    switch (toastData.type) {
+      case TOST_SUCCESS:
+        toast.success(toastData.message)
+        break;
+      case TOST_FAILURE:
+        toast.error(toastData.message);
+        break
+      default:
+        break;
+
+    }
+  }, [toastData])
+
   return (
     <div className="App">
+
       <LoadingBar color='#000' ref={loadingRef} />
+      <div><Toaster /></div>
+
       <Routes>
         <Route element={<RequireUser />}>
           <Route element={<Home />} >
@@ -39,7 +63,6 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
         </Route>
-
       </Routes>
     </div>
   );
