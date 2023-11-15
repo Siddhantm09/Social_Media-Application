@@ -1,3 +1,4 @@
+var ta = require('time-ago')
 const modifyPostResponse = (post, userId) => { //here post can be either logged in user post or otheruser post
     //userId is the logged in user(we are sending from controller)
     return {
@@ -10,7 +11,8 @@ const modifyPostResponse = (post, userId) => { //here post can be either logged 
             avatar: post.owner.avatar
         },
         likesCount: post.likes.length,
-        isLiked: post.likes.includes(userId)
+        isLiked: post.likes.includes(userId),
+        timeAgo: ta.ago(post.createdAt)
 
     }
 }

@@ -4,12 +4,17 @@ import "./Navbar.scss";
 import { AiOutlineLogout } from "react-icons/ai";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { getMyInfo } from "../../redux/slices/appConfigSlice";
+
 
 const Navbar = () => {
-    const handleLogoutClicked = () => { };
-    const dispatch = useDispatch();
+    const handleLogoutClicked = () => {
+        try {
+
+        } catch (error) {
+
+        }
+    };
+
     const navigate = useNavigate();
     const myProfile = useSelector((state) => state.appConfigSlice.myProfile);
 
@@ -29,7 +34,7 @@ const Navbar = () => {
                         className="profile hover-link"
                         onClick={() => {
                             navigate(`/profile/${myProfile?._id}`);
-                            dispatch(getMyInfo());
+
                         }}
                     >
                         <Avatar src={myProfile?.avatar?.url} />

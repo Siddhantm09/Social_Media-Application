@@ -6,7 +6,7 @@ import { followAndUnfollow } from '../../redux/slices/feedSlice'
 import { useNavigate } from "react-router";
 const Follower = (follower) => {
 
-    const [follow, setFollow] = useState();
+    const [follow, setFollow] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const feedData = useSelector(state => state.feedSlice.feedData);
@@ -17,12 +17,8 @@ const Follower = (follower) => {
     }
     useEffect(() => {
 
-        if (feedData.followings.find((item) => item._id === follower?.value?._id)) {
-            setFollow(true)
-        }
-        else {
-            setFollow(false)
-        }
+        setFollow(feedData.followings.find((item) => item._id === follower?.value?._id))
+
     }, [feedData])
 
     return (
@@ -32,7 +28,7 @@ const Follower = (follower) => {
 
                 <h3 className='name'>{follower?.value?.name}</h3>
             </div>
-            {follow ? <h5 className='hover-link follow-link' onClick={handleFollowClick}>Unfollow</h5> : <h5 className='hover-link follow-link' onClick={handleFollowClick}>Follow</h5>}
+            <h5 onClick={handleFollowClick} className={follow ? "hover-link follow-link" : "btn-primary"}>{follow ? "Unfollow" : "Follow"}</h5>
 
         </div>
     )

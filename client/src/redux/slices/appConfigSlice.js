@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { axiosClient } from '../../utils/axiosClient'
+import { followAndUnfollow } from './feedSlice'
 export const getMyInfo = createAsyncThunk('users/myprofileInfo', async (body, thunkAPI) => {
 
     try {
@@ -44,7 +45,19 @@ const appConfigSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(getMyInfo.fulfilled, (state, action) => { state.myProfile = action.payload })
-            .addCase(updateProfileThunk.fulfilled, (state, action) => { state.myProfile = action.payload })
+            .addCase(updateProfileThunk.fulfilled, (state, action) => { state.myProfile = action.payload }).addCase(followAndUnfollow.fulfilled, (state, action) => {
+                const userToFollow = action.payload
+                const index = state?.myProfile?.followings?.findIndex((item) => item._id === userToFollow?._id)
+                //following me tha userToFollow pehle se aur hamne controller me followings se nikala , so yaha se bhi nikalo 
+                if (index !== -1) {
+                    state?.myProfile?.followings?.splice(index, 1)
+                }
+                //following me nahi tha userToFollow pehle se aur hamne controller me followings se dala , so yaha se bhi dalo 
+                else {
+                    state?.myProfile?.followings?.push(userToFollow)
+                }
+
+            })
     }
 })
 export const { setLoading } = appConfigSlice.actions

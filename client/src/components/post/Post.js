@@ -2,7 +2,7 @@ import React from "react";
 import Avatar from "../avatar/Avatar";
 import "./Post.scss";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { likeAndUnlike } from "../../redux/slices/postSlice";
 import { useNavigate } from "react-router";
 // import { getUserProfile } from "../../redux/slices/postSlice";
@@ -41,7 +41,7 @@ const Post = (post) => {
                     <h4>{post?.value?.likesCount}</h4>
                 </div>
                 <p className="caption">{post?.value?.caption}</p>
-                <p className="time-ago">4 hours ago</p>
+                <p className="time-ago">{post?.value?.timeAgo}</p>
                 {/* <div>
                     <button>Delete</button>
                 </div> */}

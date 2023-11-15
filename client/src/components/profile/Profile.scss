@@ -15,7 +15,9 @@
       border-radius: 4px;
       text-align: center;
       padding: 40px;
-
+      .follow-link {
+        color: var(--accent-color);
+      }
       .image {
         width: 80px;
         height: 80px;
