@@ -7,6 +7,7 @@ import { updateProfileThunk } from '../../redux/slices/appConfigSlice'
 import { axiosClient } from '../../utils/axiosClient'
 import { KEY_ACCESS_TOKEN } from '../../utils/localStorage'
 import { useNavigate } from "react-router";
+import dummyImg from '../../assets/woman.png'
 const UpdateProfile = () => {
 
     const navigate = useNavigate();
@@ -59,7 +60,7 @@ const UpdateProfile = () => {
                 <div className='left-part'>
                     <div className="input-user-Img">
                         <label htmlFor='userImage' className='LabelImg'>
-                            <img src={userImg} alt='' />
+                            <img src={userImg ? userImg : dummyImg} alt='' />
                         </label>
                         <input type='file' id='userImage' accept='image/*' className='userImage' onChange={handleImageChange}></input>
                     </div>

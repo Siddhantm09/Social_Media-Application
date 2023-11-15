@@ -7,13 +7,13 @@ import { getFeedData } from '../../redux/slices/feedSlice'
 
 const Feed = () => {
     const dispatch = useDispatch()
-
+    const allFeedData = useSelector((state) => state.feedSlice.feedData)
     useEffect(() => {
         dispatch(
             getFeedData()
         )
     }, [dispatch])
-    const allFeedData = useSelector((state) => state.feedSlice.feedData)
+
     return (
         <div className='Feed'>
             <div className='container'>

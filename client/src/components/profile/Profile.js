@@ -54,6 +54,7 @@ const Profile = () => {
                     <div className="profile-card">
                         <img className="image" src={userProfile?.avatar?.url} alt="" />
                         <h4 className="username">{userProfile?.name}</h4>
+                        <p className="bio">{userProfile?.bio}</p>
                         <div className="follower-info">
                             <h4>{userProfile?.followers?.length} Followers</h4>
                             <h4>{userProfile?.followings?.length} Followings</h4>

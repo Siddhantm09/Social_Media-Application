@@ -4,6 +4,7 @@ import './Follower.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { followAndUnfollow } from '../../redux/slices/feedSlice'
 import { useNavigate } from "react-router";
+
 const Follower = (follower) => {
 
     const [follow, setFollow] = useState(false);
