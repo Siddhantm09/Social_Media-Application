@@ -190,10 +190,11 @@ const deleteMyProfileController = async (req, res) => {
 
 
         currUser.followers.forEach(async (followerId) => {
+            console.log('Here');
             const follower = await User.findById(followerId);
             //console.log('follower', follower);
             const index = follower.followings.indexOf(currUserId);
-            console.log('index', index);
+            // console.log('index', index);
             follower.followings.splice(index, 1);
             //console.log('after splice', follower.followings);
             await follower.save();

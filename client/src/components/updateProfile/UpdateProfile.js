@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react'
 import './UpdateProfile.scss'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-
+import { removeItem } from '../../utils/localStorage'
 import { updateProfileThunk } from '../../redux/slices/appConfigSlice'
-
+import { axiosClient } from '../../utils/axiosClient'
+import { KEY_ACCESS_TOKEN } from '../../utils/localStorage'
+import { useNavigate } from "react-router";
 const UpdateProfile = () => {
 
-
+    const navigate = useNavigate();
     const dispatch = useDispatch()
     const [name, setName] = useState('')
     const [bio, setBio] = useState('')
@@ -35,7 +37,15 @@ const UpdateProfile = () => {
             }
         }
     }
-
+    const handleDeleteUser = async () => {
+        try {
+            await axiosClient.delete('/user/delete')
+            removeItem(KEY_ACCESS_TOKEN);
+            navigate("/login");
+        } catch (error) {
+            console.log(error);
+        }
+    }
     const handleSubmit = (e) => {
 
         e.preventDefault()
@@ -60,7 +70,7 @@ const UpdateProfile = () => {
                         <input type='text' value={bio} placeholder='Your Bio' onChange={(e) => setBio(e.target.value)} />
                         <input type='submit' className='btn-primary' />
                     </form>
-                    <button className='delete-profile-btn btn-primary'>Delete Account</button>
+                    <button onClick={handleDeleteUser} className='delete-profile-btn btn-primary'>Delete Account</button>
                 </div>
             </div>
 
