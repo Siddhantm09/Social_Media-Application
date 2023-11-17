@@ -9,7 +9,7 @@ import { setToast } from "../../redux/slices/appConfigSlice";
 import { TOST_SUCCESS } from "../../App";
 
 const Post = (post) => {
-    console.log();
+    console.log('Hello');
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const themeColor = useSelector((state) => state.appConfigSlice.setTheme)
