@@ -23,6 +23,7 @@ code {
 :root {
   --border-color: #f0f0ff;
   --accent-color: #0099e5;
+  --dark-border-color: grey;
 }
 
 h1,

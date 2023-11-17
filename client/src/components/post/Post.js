@@ -31,7 +31,7 @@ const Post = (post) => {
             <div className="heading" onClick={() => navigate(`/profile/${post.value.owner._id}`)} >
                 <Avatar />
 
-                <h4 className="post-ownwer">{post?.value?.owner?.name}</h4>
+                <h4 className="post-owner">{post?.value?.owner?.name}</h4>
             </div>
             <div className="content">
                 <img src={post?.value?.image?.url} alt="" />
@@ -43,7 +43,7 @@ const Post = (post) => {
                     ) : (
                         <AiOutlineHeart className="icon" onClick={handlePostLiked} />
                     )}
-                    <h4>{post?.value?.likesCount} Likes</h4>
+                    <h4 className="post-likes">{post?.value?.likesCount} Likes</h4>
                 </div>
                 <p className="caption">{post?.value?.caption}</p>
                 <p className="time-ago">{post?.value?.timeAgo}</p>

@@ -30,6 +30,8 @@
         //display: flex;
         //justify-content: center;
         font-size: large;
+        word-spacing: 1px;
+        letter-spacing: 0.5px;
       }
 
       .follower-info,
@@ -40,6 +42,11 @@
         justify-content: center;
         //justify-content: evenly;
         gap: 40px;
+
+        // .follower-text,
+        // .following-text {
+        //   letter-spacing: 0.5px;
+        // }
       }
 
       .follow-btn,

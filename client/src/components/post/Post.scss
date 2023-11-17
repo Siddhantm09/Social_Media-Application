@@ -9,6 +9,10 @@
     height: 60px;
     padding: 20px;
     cursor: pointer;
+    .post-owner {
+      word-spacing: 1px;
+      letter-spacing: 0.5px;
+    }
   }
   .content {
     height: 400px;
@@ -29,6 +33,10 @@
 
       .icon {
         font-size: 1.5rem;
+      }
+      .post-likes {
+        // word-spacing: 1px;
+        letter-spacing: 0.5px;
       }
     }
     .caption {
@@ -52,7 +60,7 @@
     height: 60px;
     padding: 20px;
     cursor: pointer;
-    .post-ownwer {
+    .post-owner {
       color: white;
     }
   }
