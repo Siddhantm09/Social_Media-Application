@@ -46,7 +46,7 @@ function App() {
   }, [toastData])
 
   return (
-    <div className="App">
+    <div className="App" style={{ height: '100%' }}>
 
       <LoadingBar color='#000' ref={loadingRef} />
       <div><Toaster /></div>

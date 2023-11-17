@@ -1,5 +1,4 @@
 .Profile {
-  height: 100vh;
   .container {
     display: flex;
     gap: 20px;
@@ -12,10 +11,11 @@
       margin-top: 20px;
     }
     .profile-card {
-      border: 2px solid var(--border-color);
+      border: 2px solid grey;
       border-radius: 4px;
       text-align: center;
       padding: 40px;
+      background-color: #ffffff;
       .follow-link {
         color: var(--accent-color);
       }
@@ -60,7 +60,8 @@
 
 // ----------------------------------------------------------
 .Profile-dark {
-  height: 100vh;
+  background-image: url("../../assets/imageedit_2_5465537924.png");
+
   background-color: #23272a;
   .container {
     display: flex;

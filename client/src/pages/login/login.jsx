@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "../login/login.scss";
 import { axiosClient } from "../../utils/axiosClient";
 import { setItem, KEY_ACCESS_TOKEN } from "../../utils/localStorage";
-
+import vector from "../../assets/undraw_secure_login_pdn4.svg";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,33 +27,47 @@ const Login = () => {
   };
   return (
     <div className="login">
-      <div className="login-box">
-        <h2 className="heading">Login</h2>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            className="email"
-            id="email"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          ></input>
-          <label htmlFor="password">Password</label>
-          <input
-            autoComplete="on"
-            type="password"
-            className="password"
-            id="password"
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          ></input>
-          <input type="submit" className="submit"></input>
-          <label className="link">
-            Don't have an account? <Link to="/signup">Register</Link>
-          </label>
-        </form>
+      <div
+        style={{
+          display: "flex",
+          border: "1px solid black",
+          alignItems: "center",
+          justifyContent: "space-evenly",
+        }}
+      >
+        <img
+          style={{ width: "20%", height: "50%" }}
+          src={vector}
+          alt="vector"
+        />
+        <div className="login-box">
+          <h2 className="heading">Login</h2>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              className="email"
+              id="email"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            ></input>
+            <label htmlFor="password">Password</label>
+            <input
+              autoComplete="on"
+              type="password"
+              className="password"
+              id="password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            ></input>
+            <input type="submit" className="submit"></input>
+            <label className="link">
+              Don't have an account? <Link to="/signup">Register</Link>
+            </label>
+          </form>
+        </div>
       </div>
     </div>
   );

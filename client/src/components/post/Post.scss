@@ -1,7 +1,8 @@
 .Post {
-  border: 2px solid var(--border-color);
+  border: 2px solid grey;
   margin-top: 20px;
   border-radius: 4px;
+  background-color: white;
   .heading {
     display: flex;
     align-items: center;

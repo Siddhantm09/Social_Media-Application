@@ -12,7 +12,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{ height: "100%" }}>
       <Navbar />
       <div className="outlet">
         <Outlet />

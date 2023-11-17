@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import CreatePost from "../createPost/CreatePost";
 import { getUserProfile } from "../../redux/slices/postSlice";
 import { followAndUnfollow } from "../../redux/slices/feedSlice";
+import bgImage from '../../assets/DARK-MODE.png'
 
 const Profile = () => {
     const params = useParams();
@@ -34,6 +35,8 @@ const Profile = () => {
         );
     }, [myProfile, params.userId]);
     return (
+
+
         <div className={themeColor ? "Profile" : "Profile-dark"}>
             <div className="container">
                 <div className="left-part">
@@ -75,6 +78,7 @@ const Profile = () => {
                 </div>
             </div>
         </div>
+
     );
 };
 
