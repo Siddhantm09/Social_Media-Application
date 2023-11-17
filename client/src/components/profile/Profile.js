@@ -16,7 +16,7 @@ const Profile = () => {
     const [isMyProfile, setIsMyProfile] = useState()
     const userProfile = useSelector((state) => state.postSlice.userProfile)
     const myProfile = useSelector((state) => state.appConfigSlice.myProfile)
-
+    const themeColor = useSelector((state) => state.appConfigSlice.setTheme)
     //console.log(myProfile._id, userProfile._id, params);
     const handleUserFollow = () => {
         dispatch(followAndUnfollow({ userToFollowId: params?.userId }))
@@ -34,7 +34,7 @@ const Profile = () => {
         );
     }, [myProfile, params.userId]);
     return (
-        <div className="Profile">
+        <div className={themeColor ? "Profile" : "Profile-dark"}>
             <div className="container">
                 <div className="left-part">
                     {isMyProfile && <CreatePost />}
@@ -56,8 +56,8 @@ const Profile = () => {
                         <h4 className="username">{userProfile?.name}</h4>
                         <p className="bio">{userProfile?.bio}</p>
                         <div className="follower-info">
-                            <h4>{userProfile?.followers?.length} Followers</h4>
-                            <h4>{userProfile?.followings?.length} Followings</h4>
+                            <h4 className="follower-text">{userProfile?.followers?.length} Followers</h4>
+                            <h4 className="following-text">{userProfile?.followings?.length} Followings</h4>
                         </div>
                         {console.log(following, 'follow')}
                         {!isMyProfile && !following && <button onClick={handleUserFollow} className="follow-btn btn-primary">Follow</button>}

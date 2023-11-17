@@ -27,13 +27,17 @@ export const updateProfileThunk = createAsyncThunk(
 
 const appConfigSlice = createSlice({
     name: "appConfigSlice",
-    initialState: { isloading: false, myProfile: {}, toastData: {} },
+    initialState: { isloading: false, myProfile: {}, toastData: {}, setTheme: true },
     reducers: {
         setLoading: (state, action) => {
             state.isloading = action.payload;
         },
         setToast: (state, action) => {
             state.toastData = action.payload;
+        },
+        setTheme: (state, action) => {
+            console.log(action.payload);
+            state.setTheme = action.payload;
         },
     },
     extraReducers: (builder) => {
@@ -60,5 +64,5 @@ const appConfigSlice = createSlice({
             });
     },
 });
-export const { setLoading, setToast } = appConfigSlice.actions;
+export const { setLoading, setToast, setTheme } = appConfigSlice.actions;
 export default appConfigSlice.reducer;

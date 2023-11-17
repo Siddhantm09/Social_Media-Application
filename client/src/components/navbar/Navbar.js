@@ -3,12 +3,15 @@ import Avatar from "../avatar/Avatar";
 import "./Navbar.scss";
 import { AiOutlineLogout } from "react-icons/ai";
 import { useNavigate } from "react-router";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
 import { axiosClient } from "../../utils/axiosClient";
 import { KEY_ACCESS_TOKEN, removeItem } from "../../utils/localStorage";
+import { setTheme } from "../../redux/slices/appConfigSlice";
+import { MdDarkMode } from "react-icons/md";
 
 const Navbar = () => {
+    const dispatch = useDispatch()
+    const themeColor = useSelector((state) => state.appConfigSlice.setTheme)
     const handleLogoutClicked = async () => {
         try {
             await axiosClient.post("/auth/logout");
@@ -21,7 +24,7 @@ const Navbar = () => {
     const myProfile = useSelector((state) => state.appConfigSlice.myProfile);
 
     return (
-        <div className="Navbar">
+        <div className={themeColor ? "Navbar" : "Navbar-Dark"}>
             <div className="container">
                 <h2
                     className="social-banner hover-link"
@@ -29,7 +32,7 @@ const Navbar = () => {
                         navigate("/");
                     }}
                 >
-                    Social Media
+                    devConnect
                 </h2>
                 <div className="right-side">
                     <div
@@ -44,6 +47,9 @@ const Navbar = () => {
                     <div className="hover-link logout" onClick={handleLogoutClicked}>
                         <AiOutlineLogout />
                     </div>
+
+                    <MdDarkMode className="mode" onClick={() => dispatch(setTheme(!themeColor))} />
+
                 </div>
             </div>
         </div>

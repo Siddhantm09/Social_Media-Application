@@ -11,7 +11,7 @@ import { getUserProfile } from '../../redux/slices/postSlice'
 const CreatePost = () => {
     const myProfile = useSelector((state) => state.appConfigSlice.myProfile)
     //console.log(myProfile?._id);
-
+    const themeColor = useSelector((state) => state.appConfigSlice.setTheme)
 
     const dispatch = useDispatch();
     const [postImg, setPostImg] = useState()
@@ -49,12 +49,12 @@ const CreatePost = () => {
     }
 
     return (
-        <div className='CreatePost'>
+        <div className={themeColor ? "CreatePost" : "CreatePost-dark"}>
             <div className='cp-left-part'>
                 <Avatar src={myProfile?.avatar?.url} />
             </div>
             <div className='cp-right-part'>
-                <input value={caption} type='text' className='captionInput' placeholder='Whats in you mind...' onChange={(e) => setCaption(e.target.value)} />
+                <input value={caption} type='text' className='captionInput' placeholder='Whats in your mind...' onChange={(e) => setCaption(e.target.value)} />
                 {postImg && <div className='img-container'>
                     <img className='posted-img' src={postImg} alt='Uploaded Pic' />
                 </div>}

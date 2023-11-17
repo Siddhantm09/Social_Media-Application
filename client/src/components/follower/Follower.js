@@ -11,7 +11,7 @@ const Follower = (follower) => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const feedData = useSelector(state => state.feedSlice.feedData);
-
+    const themeColor = useSelector((state) => state.appConfigSlice.setTheme)
     function handleFollowClick() {
         dispatch(followAndUnfollow({ userToFollowId: follower.value._id }))
 
@@ -23,7 +23,7 @@ const Follower = (follower) => {
     }, [feedData])
 
     return (
-        <div className='follower'>
+        <div className={themeColor ? "follower" : "follower-dark"}>
             <div className='user-info' onClick={() => navigate(`/profile/${follower.value._id}`)}>
                 <Avatar src={follower?.value?.avatar?.url} />
 

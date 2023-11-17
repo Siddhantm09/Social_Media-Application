@@ -2,7 +2,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: #e2d1f9;
+  background-color: #0099e5;
   height: 60px;
   border-bottom: 1px solid var(--border-color);
   .container {
@@ -17,6 +17,42 @@
       gap: 20px;
 
       .logout {
+        align-items: center;
+        font-size: 1.8rem;
+        justify-content: center;
+      }
+      .mode {
+        font-size: 22px;
+      }
+    }
+  }
+}
+
+.Navbar-Dark {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #23272a;
+  height: 60px;
+  border-bottom: 1px solid var(--border-color);
+  .container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .social-banner {
+      color: white;
+    }
+    .right-side {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      .mode {
+        color: white;
+        font-size: 22px;
+      }
+      .logout {
+        color: white;
         align-items: center;
         font-size: 1.8rem;
         justify-content: center;

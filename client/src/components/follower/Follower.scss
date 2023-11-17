@@ -12,6 +12,27 @@
     cursor: pointer;
   }
   .follow-link {
-    color: var(--accent-color);
+    color: #0099e5;
+  }
+}
+.follower-dark {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+
+  .user-info {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    cursor: pointer;
+
+    .name {
+      color: white;
+    }
+  }
+  .follow-link {
+    color: #0099e5;
   }
 }

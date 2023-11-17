@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -7,10 +8,11 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", Poppins,
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #e8efff;
 }
 
 code {
@@ -19,8 +21,8 @@ code {
 }
 
 :root {
-  --border-color: #ddd;
-  --accent-color: #458eff;
+  --border-color: #f0f0ff;
+  --accent-color: #0099e5;
 }
 
 h1,
@@ -29,6 +31,7 @@ h3,
 h4,
 h5,
 h6 {
+  font-family: Poppins, "Helvetica Neue";
   color: #212121;
 }
 

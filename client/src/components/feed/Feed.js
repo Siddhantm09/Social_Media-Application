@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getFeedData } from '../../redux/slices/feedSlice'
 
 const Feed = () => {
+    const themeColor = useSelector((state) => state.appConfigSlice.setTheme)
     const dispatch = useDispatch()
     const allFeedData = useSelector((state) => state.feedSlice.feedData)
     useEffect(() => {
@@ -15,7 +16,7 @@ const Feed = () => {
     }, [dispatch])
 
     return (
-        <div className='Feed'>
+        <div className={themeColor ? "Feed" : "Feed-dark"}>
             <div className='container'>
                 <div className='left-part'>
                     {allFeedData?.MappedFollowingposts?.map((post) => {
