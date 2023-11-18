@@ -12,7 +12,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #e8efff;
 }
 
 code {
@@ -34,15 +33,16 @@ h5,
 h6 {
   font-family: Poppins, "Helvetica Neue";
   color: #212121;
+  font-size: 15px;
+  font-weight: 900;
 }
 
 h3,
 h6 {
-  font-weight: 400;
+  font-weight: 900;
 }
 
 p {
-  color: #555;
   font-size: 0.9rem;
 }
 
@@ -60,13 +60,14 @@ p {
 }
 
 .btn-primary {
-  background-color: var(--accent-color);
+  background-color: #4434a4;
   color: white;
   font-weight: bold;
-  padding: 10px 40px;
+  padding: 5px 20px;
   border-radius: 4px;
   cursor: pointer;
   border: none;
+  border: 1px solid #4434a4;
 }
 
 .btn-primary:hover {
@@ -78,8 +79,9 @@ p {
 }
 
 .btn-secondary {
-  border: 1px solid var(--accent-color);
-  color: var(--accent-color);
+  border: 1px solid #4434a4;
+  background-color: white;
+  color: #4434a4;
   font-weight: bold;
   padding: 10px 40px;
   border-radius: 4px;

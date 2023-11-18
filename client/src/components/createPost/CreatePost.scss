@@ -1,7 +1,8 @@
 .CreatePost {
+  border: 2px solid #a57ee6;
   display: flex;
   background-color: white;
-  border: 2px solid grey;
+
   border-radius: 4px;
   padding: 20px;
   gap: 20px;
@@ -29,7 +30,7 @@
 
     .LabelImg {
       display: inline-block;
-      background-color: var(--accent-color);
+      background-color: #4434a4;
       color: white;
       display: flex;
       justify-content: center;

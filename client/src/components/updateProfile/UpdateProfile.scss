@@ -1,6 +1,6 @@
 .UpdateProfile {
   padding-top: 20px;
-
+  background-image: url("../../assets/imageedit_2_5465537924.png");
   .container {
     display: flex;
     text-align: center;
@@ -39,6 +39,7 @@
     .right-part {
       flex: 3;
 
+      background-color: #222222;
       form {
         border: 1px solid var(--border-color);
         padding: 16px 32px;

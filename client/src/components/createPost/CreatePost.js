@@ -3,7 +3,6 @@ import Avatar from '../avatar/Avatar'
 import './CreatePost.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { axiosClient } from '../../utils/axiosClient'
-
 import { getUserProfile } from '../../redux/slices/postSlice'
 
 
@@ -42,7 +41,6 @@ const CreatePost = () => {
             console.log(error);
         }
         finally {
-
             setCaption('')
             setPostImg('')
         }

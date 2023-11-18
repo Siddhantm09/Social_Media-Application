@@ -12,7 +12,14 @@
     cursor: pointer;
   }
   .follow-link {
-    color: #0099e5;
+    background-color: white;
+    color: #4434a4;
+    font-weight: bold;
+    padding: 5px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    border: 1px solid #4434a4;
   }
 }
 .follower-dark {
@@ -27,12 +34,18 @@
     display: flex;
     gap: 10px;
     cursor: pointer;
-
     .name {
       color: white;
     }
   }
   .follow-link {
-    color: #0099e5;
+    background-color: #4434a4;
+    color: white;
+    font-weight: bold;
+    padding: 5px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    border: 1px solid #4434a4;
   }
 }

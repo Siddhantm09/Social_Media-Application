@@ -26,14 +26,14 @@ const Navbar = () => {
     return (
         <div className={themeColor ? "Navbar" : "Navbar-Dark"}>
             <div className="container">
-                <h2
+                <h1
                     className="social-banner hover-link"
                     onClick={() => {
                         navigate("/");
                     }}
                 >
                     devConnect
-                </h2>
+                </h1>
                 <div className="right-side">
                     <div
                         className="profile hover-link"

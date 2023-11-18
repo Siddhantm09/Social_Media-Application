@@ -1,5 +1,4 @@
 .Feed {
-  // height: 100vh;
   .container {
     display: flex;
     gap: 20px;
@@ -17,14 +16,15 @@
     }
 
     .title {
+      font-weight: 800;
       margin-bottom: 12px;
     }
   }
 }
 
 .Feed-dark {
-  height: 100vh;
-  background-color: #222222;
+  background-image: url("../../assets/imageedit_2_5465537924.png");
+  background-color: #23272a;
   .container {
     display: flex;
     gap: 20px;

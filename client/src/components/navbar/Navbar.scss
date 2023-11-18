@@ -2,7 +2,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: #1ab8e3;
+  background-color: white;
   height: 60px;
   border-bottom: 1px solid var(--border-color);
   .container {
@@ -10,7 +10,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
+    .social-banner {
+      font-weight: bold;
+      font-size: x-large;
+    }
     .right-side {
       display: flex;
       align-items: center;
@@ -42,6 +45,8 @@
     justify-content: space-between;
     .social-banner {
       color: white;
+      font-weight: bold;
+      font-size: x-large;
     }
     .right-side {
       display: flex;
