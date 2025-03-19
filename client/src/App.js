@@ -15,6 +15,7 @@ import toast, { Toaster } from 'react-hot-toast';
 export const TOST_SUCCESS = 'toast_success'
 export const TOST_FAILURE = 'toast_failure'
 
+console.log('heelo');
 
 function App() {
   const loadingRef = useRef(null)
